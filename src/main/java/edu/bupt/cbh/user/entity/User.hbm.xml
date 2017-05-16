@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="edu.bupt.cbh.user.entity.User" table="用户表">
+		<!-- 映射ID -->
+		<id name="id" column="用户ID" type="integer">
+			<!-- 主键采用MySQL的自增长策略 -->
+			<generator class="identity" />
+		</id>
+
+		<!-- 映射普通属性 -->
+		<property name="name" column="用户名" unique="true" />
+		<property name="password" column="密码" />
+
+	</class>
+</hibernate-mapping>

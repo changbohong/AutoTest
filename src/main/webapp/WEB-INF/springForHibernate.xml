@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx 
+        http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+	<!-- 定义c3p0数据源 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		p:driverClass="com.mysql.jdbc.Driver" p:jdbcUrl="jdbc:mysql://localhost:3306/auto_test?useSSL=false"
+		p:user="root" p:password="123456" p:maxPoolSize="40" p:minPoolSize="40"
+		p:initialPoolSize="1" p:maxIdleTime="20" />
+
+	<!-- 定义Hibernate的SessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+		p:dataSource-ref="dataSource">
+
+		<!-- 指定数据库方言，是否自动建表，是否生成SQL语句等 -->
+		<property name="hibernateProperties">
+			<props>
+				<!-- session设置 -->
+				<prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext
+				</prop>
+				<!-- 数据库方言 -->
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<!-- 自动建表 -->
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<!-- sql语句 -->
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.use_sql_comments">true</prop>
+				<!-- 抑制警告 -->
+				<prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>
+			</props>
+		</property>
+
+		<!-- 列出Hibernate映射文件 -->
+		<property name="mappingResources">
+			<list>
+				<value>edu/bupt/cbh/user/entity/User.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 注解式事务管理 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" />
+</beans>
