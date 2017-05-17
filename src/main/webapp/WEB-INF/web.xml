@@ -4,11 +4,18 @@
 		 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
 	                    http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 
+	<jsp-config>
+		<jsp-property-group>
+			<url-pattern>*.jsp</url-pattern>
+			<trim-directive-whitespaces>true</trim-directive-whitespaces>
+		</jsp-property-group>
+	</jsp-config>
+
 	<!-- 指定spring配置文件（默认为/WEB-INF/applicationContext.xml） -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			/WEB-INF/spring/*.xml
+			classpath:spring-source.xml
 		</param-value>
 	</context-param>
 
@@ -29,7 +36,7 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>WEB-INF/spring/springmvc-servlet.xml</param-value>
+			<param-value>classpath:spring.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
