@@ -11,5 +11,29 @@ public class User {
     //姓名
     private String name;
     //密码
-    private String password = Constants.User.DEFAULT_PASSWORD;
+    private String password = Constants.UserCons.DEFAULT_PASSWORD;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

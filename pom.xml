@@ -16,6 +16,7 @@
         <servlet-api-version>2.5</servlet-api-version>
         <mysql-connector-version>5.1.36</mysql-connector-version>
         <java-version>1.7</java-version>
+        <dbcp2-version>2.1.1</dbcp2-version>
     </properties>
 
     <dependencies>
@@ -26,7 +27,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- spring begin -->
+        <!-- 1 spring and springMVC -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -69,9 +70,9 @@
             <artifactId>spring-jdbc</artifactId>
             <version>${org.springframework-version}</version>
         </dependency>
-        <!-- spring end-->
 
-        <!-- mybatis begin -->
+
+        <!-- 2 mybatis -->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
@@ -82,8 +83,25 @@
             <artifactId>mybatis-spring</artifactId>
             <version>1.0.2</version>
         </dependency>
-        <!-- mybatis end -->
 
+
+        <!-- 3 数据库 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector-version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- 导入dbcp的jar包，用来在applicationContext.xml中配置数据库 -->
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
+            <version>${dbcp2-version}</version>
+        </dependency>
+
+
+        <!-- 4 其他 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
@@ -104,20 +122,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- mysql jconnector -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql-connector-version}</version>
-        </dependency>
-
-        <!-- 导入dbcp的jar包，用来在applicationContext.xml中配置数据库 -->
-        <!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
-        <dependency>
-            <groupId>commons-dbcp</groupId>
-            <artifactId>commons-dbcp</artifactId>
-            <version>1.4</version>
-        </dependency>
 
 
     </dependencies>

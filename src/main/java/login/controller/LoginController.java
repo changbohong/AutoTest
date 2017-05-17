@@ -1,4 +1,4 @@
-package login;
+package login.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +16,11 @@ public class LoginController {
     @RequestMapping("/toLogin")
     public ModelAndView toLogin(){
         ModelAndView modelAndView = new ModelAndView("login");
+        return modelAndView;
+    }
+
+    public ModelAndView login(){
+        ModelAndView modelAndView = new ModelAndView();
         return modelAndView;
     }
 }

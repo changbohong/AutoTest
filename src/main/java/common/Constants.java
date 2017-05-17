@@ -5,7 +5,7 @@ package common;
  */
 public class Constants {
 
-    public static class User{
+    public static class UserCons{
         public static final String DEFAULT_PASSWORD = "123456";
     }
 }
