@@ -17,3 +17,5 @@ target
 
 # ignore logs
 logs
+
+.idea
