@@ -1,4 +1,4 @@
-package login.controller;
+package edu.bupt.cbh.login.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +15,7 @@ public class LoginController {
      */
     @RequestMapping("/toLogin")
     public ModelAndView toLogin(){
-        ModelAndView modelAndView = new ModelAndView("login");
+        ModelAndView modelAndView = new ModelAndView("edu.bupt.cbh.login");
         return modelAndView;
     }
 

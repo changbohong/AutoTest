@@ -1,6 +1,6 @@
-package user.entity;
+package edu.bupt.cbh.user.entity;
 
-import common.Constants;
+import edu.bupt.cbh.common.Constants;
 
 /**
  * Created by changbohong on 2017/5/15.

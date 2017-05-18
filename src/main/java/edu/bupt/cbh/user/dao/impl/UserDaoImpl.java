@@ -1,10 +1,9 @@
-package user.dao.impl;
+package edu.bupt.cbh.user.dao.impl;
 
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
-import user.dao.UserDao;
-import user.entity.User;
-import common.BaseDao;
+import edu.bupt.cbh.user.dao.UserDao;
+import edu.bupt.cbh.user.entity.User;
+import edu.bupt.cbh.common.BaseDao;
 
 /**
  * Created by changbohong on 2017/5/16.

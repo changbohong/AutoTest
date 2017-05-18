@@ -1,6 +1,6 @@
-package user.dao;
+package edu.bupt.cbh.user.dao;
 
-import user.entity.User;
+import edu.bupt.cbh.user.entity.User;
 
 /**
  * Created by changbohong on 2017/5/16.

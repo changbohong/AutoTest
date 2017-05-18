@@ -1,4 +1,4 @@
-package login.service.impl;
+package edu.bupt.cbh.login.service.impl;
 
 /**
  * Created by changbohong on 2017/5/16.

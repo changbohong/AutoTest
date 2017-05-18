@@ -1,10 +1,10 @@
-package user.service.impl;
+package edu.bupt.cbh.user.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import user.dao.UserDao;
-import user.entity.User;
-import user.service.UserService;
+import edu.bupt.cbh.user.dao.UserDao;
+import edu.bupt.cbh.user.entity.User;
+import edu.bupt.cbh.user.service.UserService;
 
 /**
  * Created by changbohong on 2017/5/16.

@@ -1,4 +1,4 @@
-package common;
+package edu.bupt.cbh.common;
 
 /**
  * Created by changbohong on 2017/5/15.
