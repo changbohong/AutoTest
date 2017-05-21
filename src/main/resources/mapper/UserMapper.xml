@@ -13,6 +13,6 @@
     <select id="getUserByName" resultMap="baseResultMap">
         select *
         from edu.bupt.cbh.user
-        where id = #{id,jdbcType=INTEGER};
+        where name = #{name,jdbcType=VARCHAR};
     </select>
 </mapper>

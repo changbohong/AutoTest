@@ -20,8 +20,7 @@ public class LoginController {
      */
     @RequestMapping("/toLogin")
     public ModelAndView toLogin(){
-        ModelAndView modelAndView = new ModelAndView("login");
-        return modelAndView;
+        return new ModelAndView("login");
     }
 
     @RequestMapping("/login")
