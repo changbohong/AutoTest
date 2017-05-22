@@ -10,9 +10,14 @@ public class Constants {
     }
 
     public static class InitTemplateCons {
-        public static final String REGIST_PATH = "/Users/scarlett/Developer/AutoTest/src/main/java/edu/bupt/cbh/template/init/RegistTemplate";
+        public static final String REGIST_PATH = "/Users/scarlett/Developer/AutoTest/src/main/java/edu/bupt/cbh/template/init/RegistTemplate.xml";
         public static final String REGIST_LISTNODE = "template";
         public static final String LOGIN_PATH = "";
         public static final String LOGIN_LEVELONE = "";
+    }
+
+    public static class TestCons{
+        public static final Integer EXCUTE_NOW = 1;
+        public static final Integer NOT_EXCUTE_NOW = -1;
     }
 }

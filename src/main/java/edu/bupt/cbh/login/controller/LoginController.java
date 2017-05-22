@@ -37,7 +37,7 @@ public class LoginController {
         }
     }
 
-    @RequestMapping("/initTemplate")
+    @RequestMapping("/init")
     public void initTemplate(){
         initTemplatDataBaseeService.initTemplateDataBase();
     }

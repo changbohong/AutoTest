@@ -15,6 +15,6 @@ public class TemplateDaoImpl extends BaseDaoImpl implements TemplateDao{
 
     @Override
     public void initTemplateDatabase(List<RegistTestTemplate> registTestTemplateList) {
-
+        sqlSessionTemplate.insert(this.getNameSpace() + ".initTemplateDatabase", registTestTemplateList);
     }
 }

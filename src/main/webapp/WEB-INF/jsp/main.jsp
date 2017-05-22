@@ -24,7 +24,9 @@
         <%@ include file="headTop.jsp" %>
     </div>
 
-
+    <a class="btn btn-success" href="/test/toCreate" target="_blank">
+        <span class="glyphicon glyphicon-plus"></span> 添加
+    </a>
 </div>
 </body>
 </html>

@@ -6,6 +6,8 @@ import javax.xml.parsers.*;
 import org.w3c.dom.*;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 
 /**
  * Created by scarlett on 2017/5/22.
@@ -24,9 +26,13 @@ public class ParseXmlServiceImpl implements ParseXml{
             // step 3:解析一个xml文档，获得Document对象（根节点）
             // 此文档放在项目目录下即可
             Document doc = db.parse(new File(filePath));
+            System.out.println("doc.toString():"+doc.toString());
+
+            //得到文档的跟标签
+            Element root = doc.getDocumentElement();
 
             // 根据标签名访问节点
-            NodeList nodeList = doc.getElementsByTagName(listNode);
+            NodeList nodeList = root.getElementsByTagName(listNode);
             System.out.println("parseXml 共有" + nodeList.getLength() + "个节点");
 
             return nodeList;

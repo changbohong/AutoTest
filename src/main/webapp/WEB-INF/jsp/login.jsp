@@ -10,6 +10,16 @@
     <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $("#init").click(function(){
+                $.get("/init");
+            });
+        });
+    </script>
+
+
 </head>
 <body>
 
@@ -37,6 +47,8 @@
             </div>
         </div>
     </form>
+
+    <button id="init">init</button>
 </div>
 
 </body>

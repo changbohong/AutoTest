@@ -3,8 +3,8 @@
 <configuration>
 
     <typeAliases>
-        <typeAlias alias="User" type="edu.bupt.cbh.user.entity.User" />
-
+        <typeAlias alias="User" type="edu.bupt.cbh.user.entity.User"/>
+        <typeAlias alias="RegistTestTemplate" type="edu.bupt.cbh.template.entity.RegistTestTemplate"/>
 
     </typeAliases>
 
