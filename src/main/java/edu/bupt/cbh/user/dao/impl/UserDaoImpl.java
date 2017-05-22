@@ -12,6 +12,6 @@ import edu.bupt.cbh.common.BaseDao;
 public class UserDaoImpl extends BaseDao implements UserDao {
 
     public User getUserByName(String name) {
-        return (User) sqlSessionTemplate.selectOne(".getUserByName", name);
+        return (User) sqlSessionTemplate.selectOne(this.getNameSpace() + ".getUserByName", name);
     }
 }

@@ -12,7 +12,7 @@
     </sql>
     <select id="getUserByName" resultMap="baseResultMap">
         select *
-        from edu.bupt.cbh.user
+        from user
         where name = #{name,jdbcType=VARCHAR};
     </select>
 </mapper>
