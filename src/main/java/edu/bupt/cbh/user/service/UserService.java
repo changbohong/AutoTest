@@ -8,7 +8,7 @@ import edu.bupt.cbh.user.entity.User;
 public interface UserService {
     /**
      * 检查密码正确
-     * @param name
+     * @param user
      * @return
      */
     public boolean checkPassword(User user);

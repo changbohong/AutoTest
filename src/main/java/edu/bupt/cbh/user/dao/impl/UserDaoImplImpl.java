@@ -3,13 +3,13 @@ package edu.bupt.cbh.user.dao.impl;
 import org.springframework.stereotype.Repository;
 import edu.bupt.cbh.user.dao.UserDao;
 import edu.bupt.cbh.user.entity.User;
-import edu.bupt.cbh.common.BaseDao;
+import edu.bupt.cbh.common.dao.BaseDaoImpl;
 
 /**
  * Created by changbohong on 2017/5/16.
  */
 @Repository
-public class UserDaoImpl extends BaseDao implements UserDao {
+public class UserDaoImplImpl extends BaseDaoImpl implements UserDao {
 
     public User getUserByName(String name) {
         return (User) sqlSessionTemplate.selectOne(this.getNameSpace() + ".getUserByName", name);

@@ -1,5 +1,6 @@
 package edu.bupt.cbh.login.controller;
 
+import edu.bupt.cbh.template.service.InitTemplatDataBaseeService;
 import edu.bupt.cbh.user.entity.User;
 import edu.bupt.cbh.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private InitTemplatDataBaseeService initTemplatDataBaseeService;
+
     /**
      * 未登录，返回登录页面
      * @return
@@ -30,5 +35,10 @@ public class LoginController {
         } else {
             return new ModelAndView("login");
         }
+    }
+
+    @RequestMapping("/initTemplate")
+    public void initTemplate(){
+        initTemplatDataBaseeService.initTemplateDataBase();
     }
 }
