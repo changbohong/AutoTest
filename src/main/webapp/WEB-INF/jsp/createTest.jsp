@@ -43,7 +43,7 @@
             <label><input type="radio" name="isExcuteNow" id="optionsRadios2" value="-1"> 定时执行</label>
         </div>
 
-        <div class="input-append date form_datetime" data-date="2012-12-21T15:25:00Z">
+        <div class="input-append date form_datetime" data-date="2012-12-21T15:25:00Z" name="excuteTime">
             <input size="16" type="text" value="" readonly>
             <span class="add-on"><i class="icon-remove"></i></span>
             <span class="add-on"><i class="icon-th"></i></span>

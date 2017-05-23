@@ -35,4 +35,15 @@
   	<mvc:annotation-driven/>  
     <mvc:default-servlet-handler/>
 
+    <!-- 拦截器 -->
+    <mvc:interceptors>
+        <!-- 多个拦截器，顺序执行 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="edu.bupt.cbh.login.LoginInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
+
 </beans>
