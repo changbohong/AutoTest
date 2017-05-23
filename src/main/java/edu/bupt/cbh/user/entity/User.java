@@ -9,7 +9,7 @@ public class User {
     //唯一id
     private Integer id;
     //姓名
-    private String name;
+    private String username;
     //密码
     private String password = Constants.UserCons.DEFAULT_PASSWORD;
 
@@ -21,12 +21,12 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.bupt.cbh.test.dao.impl.TestDaoImpl">
+    <resultMap id="baseResultMap" type="Test">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="test_column_list">
+        user_id,name,excuted,create_time,is_excute_now,excute_time
+    </sql>
+
+    <insert id="insertTest" parameterType="Test" useGeneratedKeys="true" keyProperty="id">
+    insert
+    into test(<include refid="test_column_list"/>)
+    values(#{userId},#{name},#{excuted},#{createTime},#{isExcuteNow},#{excuteTime})
+    </insert>
+
+</mapper>

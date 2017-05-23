@@ -17,7 +17,9 @@ public class Constants {
     }
 
     public static class TestCons{
-        public static final Integer EXCUTE_NOW = 1;
-        public static final Integer NOT_EXCUTE_NOW = -1;
+        public static final Boolean EXCUTE_NOW = true;
+        public static final Boolean NOT_EXCUTE_NOW = false;
+        public static final Boolean EXCUTED = true;
+        public static final Boolean NOT_EXCUTED = false;
     }
 }

@@ -27,14 +27,14 @@ public class LoginController {
      * @return
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String toLogin(){
+    public String login(){
         return LOGIN;
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(HttpSession httpSession, User user){
         if (userService.checkPassword(user)){
-            httpSession.setAttribute("username", user.getName());
+            httpSession.setAttribute("username", user.getUsername());
             return "redirect:/main";
         } else {
             return LOGIN;
@@ -43,7 +43,7 @@ public class LoginController {
 
     @RequestMapping(value = {"/", "/main"})
     public ModelAndView main(){
-        return new ModelAndView("main");
+        return new ModelAndView("main/main");
     }
 
     @RequestMapping("/init")

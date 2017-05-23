@@ -19,14 +19,23 @@ public class Test {
 
     private String name;
 
+
+    private Boolean excuted = Constants.TestCons.NOT_EXCUTED;
+
     //创建时间
-    private Timestamp createTime;
+    private Date createTime;
 
     //是否立即执行 1表示立即执行 -1表示否 默认立即执行
-    private Integer isExcuteNow = Constants.TestCons.EXCUTE_NOW;
+    private Boolean isExcuteNow = Constants.TestCons.EXCUTE_NOW;
 
     //执行时间
-    private Timestamp excuteTime = null;
+    private Date excuteTime = null;
+
+
+
+
+
+
 
     public Integer getId() {
         return id;
@@ -36,19 +45,19 @@ public class Test {
         this.id = id;
     }
 
-    public Timestamp getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Timestamp createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
-    public Timestamp getExcuteTime() {
+    public Date getExcuteTime() {
         return excuteTime;
     }
 
-    public void setExcuteTime(Timestamp excuteTime) {
+    public void setExcuteTime(Date excuteTime) {
         this.excuteTime = excuteTime;
     }
 
@@ -60,11 +69,11 @@ public class Test {
         this.userId = userId;
     }
 
-    public Integer getIsExcuteNow() {
+    public Boolean getIsExcuteNow() {
         return isExcuteNow;
     }
 
-    public void setIsExcuteNow(Integer isExcuteNow) {
+    public void setIsExcuteNow(Boolean isExcuteNow) {
         this.isExcuteNow = isExcuteNow;
     }
 
@@ -74,5 +83,13 @@ public class Test {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Boolean getExcuted() {
+        return excuted;
+    }
+
+    public void setExcuted(Boolean excuted) {
+        this.excuted = excuted;
     }
 }

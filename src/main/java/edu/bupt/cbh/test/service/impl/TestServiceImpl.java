@@ -3,6 +3,9 @@ package edu.bupt.cbh.test.service.impl;
 import edu.bupt.cbh.test.dao.TestDao;
 import edu.bupt.cbh.test.entity.Test;
 import edu.bupt.cbh.test.service.TestService;
+import edu.bupt.cbh.test.vo.CreateTestVO;
+import edu.bupt.cbh.user.dao.UserDao;
+import edu.bupt.cbh.user.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,14 +21,20 @@ public class TestServiceImpl implements TestService {
     @Autowired
     private TestDao testDao;
 
+    @Autowired
+    private UserDao userDao;
+
     @Override
-    public Integer createTest(Integer userId, Integer isExcuteNow, Timestamp excuteTime) {
+    public Integer createTest(String username, CreateTestVO createTestVO) {
         Test test = new Test();
+        User user = userDao.getUserByUsername(username);
+        Integer userId = user.getId();
         test.setUserId(userId);
-        test.setIsExcuteNow(isExcuteNow);
-        test.setCreateTime(new Timestamp(new Date().getTime()));
-        test.setExcuteTime(excuteTime);
-        return testDao.insertTest(test);
+        test.setName(createTestVO.getName());
+        test.setCreateTime(new Date());
+        test.setExcuteTime(createTestVO.getExcuteTime());
+        testDao.insertTest(test);
+        return test.getId();
     }
 
     @Override

@@ -10,18 +10,20 @@
 <html>
 <head>
     <meta name="viewport" http-equiv="Content-Type" content="text/html" charset="UTF-8">
-    <title>请登录</title>
+    <title>AutoTest</title>
+
     <!-- 引入 Bootstrap -->
     <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 <div class="container">
     <div class="navigator">
-        <%@ include file="headTop.jsp" %>
+        <%@ include file="../headTop.jsp" %>
     </div>
 
     <a class="btn btn-success" href="/test/toCreate" target="_blank">

@@ -3,16 +3,16 @@
 <mapper namespace="edu.bupt.cbh.user.dao.impl.UserDaoImplImpl">
     <resultMap id="baseResultMap" type="User">
         <result property="id" column="id" jdbcType="INTEGER"/>
-        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
         <result property="password" column="password" jdbcType="VARCHAR"/>
     </resultMap>
     
     <sql id="user_column_list">
-        name,password
+        username,password
     </sql>
-    <select id="getUserByName" resultMap="baseResultMap">
+    <select id="getUserByUsername" resultMap="baseResultMap">
         select *
         from user
-        where name = #{name,jdbcType=VARCHAR};
+        where username = #{username,jdbcType=VARCHAR};
     </select>
 </mapper>
