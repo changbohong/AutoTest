@@ -1,26 +1,21 @@
 package edu.bupt.cbh.test.controller;
 
-import com.alibaba.fastjson.JSONObject;
+import edu.bupt.cbh.test.entity.Test;
 import edu.bupt.cbh.test.service.TestService;
 import edu.bupt.cbh.test.vo.CreateTestVO;
-import edu.bupt.cbh.test.vo.TestVO;
-import edu.bupt.cbh.user.entity.User;
 import edu.bupt.cbh.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestDataBinder;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 /**
  * Created by scarlett on 2017/5/22.
@@ -42,12 +37,6 @@ public class TestController {
         return modelAndView;
     }
 
-    //将前缀为CreateTestVO.的属性绑定到 名称为CreateTestVO的对象
-    @InitBinder("CreateTestVO")
-    public void initBinder1(WebDataBinder binder){
-        binder.setFieldDefaultPrefix("CreateTestVO.");
-    }
-
     //springMVC接收前端Date数据，格式转换
     @InitBinder
     public void initBinder(ServletRequestDataBinder bin){
@@ -57,16 +46,25 @@ public class TestController {
     }
 
     @RequestMapping(value = "/createTest", method = RequestMethod.POST)
-    public Model createTest(HttpSession httpSession, CreateTestVO createTestVO, Model model) {
+    public ModelAndView createTest(HttpSession httpSession, CreateTestVO createTestVO) {
+        ModelAndView modelAndView = new ModelAndView("main/main");
         String username = (String) httpSession.getAttribute("username");
         Integer testId = testService.createTest(username, createTestVO);
         if (testId == null) {
             String msg = "创建测试失败，测试名称为：" + createTestVO.getName();
-            model.addAttribute("msg", msg);
+            modelAndView.addObject("msg", msg);
             System.out.println(msg);
-            return model;
+            return modelAndView;
         }
-        model.addAttribute("msg", "创建成功");
-        return model;
+        modelAndView.addObject("msg", "创建成功");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/searchTest")
+    public ModelAndView searchTest(String name, Integer page){
+        ModelAndView modelAndView = new ModelAndView("test/listTest");
+        List<Test> testList = testService.searchTestLikeName(name);
+        modelAndView.addObject("testList", testList);
+        return modelAndView;
     }
 }

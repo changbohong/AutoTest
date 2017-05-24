@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by scarlett on 2017/5/22.
@@ -35,6 +36,24 @@ public class TestServiceImpl implements TestService {
         test.setExcuteTime(createTestVO.getExcuteTime());
         testDao.insertTest(test);
         return test.getId();
+    }
+
+    @Override
+    public List<Test> searchTestByName(String name) {
+        return testDao.searchTestByName(name);
+    }
+
+    @Override
+    public List<Test> searchTestLikeName(String name) {
+        if (name == null){
+            name = "";
+        }
+        return testDao.searchTestLikeName(name);
+    }
+
+    @Override
+    public void DeleteTestBy(Integer id) {
+
     }
 
     @Override

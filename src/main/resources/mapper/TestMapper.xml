@@ -4,8 +4,11 @@
     <resultMap id="baseResultMap" type="Test">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="userId" column="user_id" jdbcType="INTEGER"/>
-        <result property="username" column="username" jdbcType="VARCHAR"/>
-        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="DATE"/>
+        <result property="excuteTime" column="excute_time" jdbcType="DATE"/>
+        <result property="excuted" column="excuted" jdbcType="TINYINT"/>
+        <result property="isExcuteNow" column="is_excute_now" jdbcType="TINYINT"/>
     </resultMap>
 
     <sql id="test_column_list">
@@ -18,4 +21,15 @@
     values(#{userId},#{name},#{excuted},#{createTime},#{isExcuteNow},#{excuteTime})
     </insert>
 
+    <select id="searchTestLikeName" resultMap="baseResultMap">
+        select *
+        from test
+        where name LIKE CONCAT('%',#{testName,jdbcType=VARCHAR},'%');
+    </select>
+
+    <select id="searchTestByName" resultMap="baseResultMap">
+        select *
+        from test
+        where name = #{testName,jdbcType=VARCHAR};
+    </select>
 </mapper>

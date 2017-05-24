@@ -32,12 +32,12 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(HttpSession httpSession, User user){
+    public ModelAndView login(HttpSession httpSession, User user){
         if (userService.checkPassword(user)){
             httpSession.setAttribute("username", user.getUsername());
-            return "redirect:/main";
+            return new ModelAndView("main/main");
         } else {
-            return LOGIN;
+            return new ModelAndView("login");
         }
     }
 
