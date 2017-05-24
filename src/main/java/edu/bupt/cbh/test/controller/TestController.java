@@ -7,14 +7,17 @@ import edu.bupt.cbh.test.vo.TestVO;
 import edu.bupt.cbh.user.entity.User;
 import edu.bupt.cbh.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,6 +46,14 @@ public class TestController {
     @InitBinder("CreateTestVO")
     public void initBinder1(WebDataBinder binder){
         binder.setFieldDefaultPrefix("CreateTestVO.");
+    }
+
+    //springMVC接收前端Date数据，格式转换
+    @InitBinder
+    public void initBinder(ServletRequestDataBinder bin){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        CustomDateEditor cust = new CustomDateEditor(sdf,true);
+        bin.registerCustomEditor(Date.class,cust);
     }
 
     @RequestMapping(value = "/createTest", method = RequestMethod.POST)

@@ -16,12 +16,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="main.jsp">AutoTest Project</a>
+                <a class="navbar-brand" href="/">AutoTest Project</a>
             </div>
             <div class="collapse navbar-collapse" id="example-navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                    <li><a href="#shop"><span class="glyphicon glyphicon-shopping-cart"></span> Shop</a></li>
+                    <li class="active"><a href="/"><span class="glyphicon glyphicon-home"></span> 主页</a></li>
+                    <li><a href="/test/toCreate" target="_blank"><span class="glyphicon glyphicon-plus"></span> 创建测试</a></li>
                     <li><a href="#support"><span class="glyphicon glyphicon-headphones"></span> Support</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
