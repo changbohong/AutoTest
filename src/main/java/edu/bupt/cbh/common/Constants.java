@@ -22,4 +22,6 @@ public class Constants {
         public static final Boolean EXCUTED = true;
         public static final Boolean NOT_EXCUTED = false;
     }
+
+    public static final Integer PAGE_SIZE = 10;
 }

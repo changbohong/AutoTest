@@ -26,4 +26,6 @@ public interface TestDao {
      * @return
      */
     List<Test> searchTestByName(String testName);
+
+    Test getTestById(Integer id);
 }

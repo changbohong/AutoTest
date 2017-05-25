@@ -5,7 +5,9 @@ import edu.bupt.cbh.test.dao.TestDao;
 import edu.bupt.cbh.test.entity.Test;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by scarlett on 2017/5/22.
@@ -24,11 +26,16 @@ public class TestDaoImpl extends BaseDaoImpl implements TestDao {
 
     @Override
     public List<Test> searchTestLikeName(String testName) {
-        return sqlSessionTemplate.selectList(this.getNameSpace()+".searchTestLikeName",testName);
+        return sqlSessionTemplate.selectList(this.getNameSpace() + ".searchTestLikeName", testName);
     }
 
     @Override
     public List<Test> searchTestByName(String testName) {
-        return sqlSessionTemplate.selectList(this.getNameSpace()+".searchTestByName",testName);
+        return sqlSessionTemplate.selectList(this.getNameSpace() + ".searchTestByName", testName);
+    }
+
+    @Override
+    public Test getTestById(Integer id) {
+        return sqlSessionTemplate.selectOne(this.getNameSpace() + "getTestById", id);
     }
 }

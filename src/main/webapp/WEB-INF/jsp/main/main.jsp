@@ -39,7 +39,7 @@
         .bg-footer {
             padding-top: 10px;
             color: grey;
-            background-color: #222222;/*主题色：#222222*/
+            background-color: #222222; /*主题色：#222222*/
         }
 
         footer {
@@ -86,19 +86,19 @@
             runWaitMe("#main");
             // 加载第1页到#main
             params.page = 1;
-            $("#main").load(url, params, function() {
+            $("#main").load(url, params, function () {
                 // 隐藏Loading
                 $("#main").waitMe("hide");
                 // 初始化分页插件
                 $(".pagination").jqPagination({
-                    page_string : "第 {current_page} / {max_page} 页",
+                    page_string: "第 {current_page} / {max_page} 页",
                     // 点击翻页按钮回调
-                    paged : function(page) {
+                    paged: function (page) {
                         // 显示Loading画面
                         runWaitMe();
                         // 刷新table load表示刷新局部
                         params.page = page;
-                        $("table").load(url + " thead,tbody", params, function() {
+                        $("table").load(url + " thead,tbody", params, function () {
                             // 隐藏Loading
                             $("#main").waitMe("hide");
                         });
@@ -174,14 +174,15 @@
         </div><!-- /.container -->
     </div>
 </nav>
+<!--创建测试成功，提示信息-->
 <c:if test="${msg!=null}">
-<div class="alert alert-success alert-dismissable">
-    <button type="button" class="close" data-dismiss="alert"
-            aria-hidden="true">
-        &times;
-    </button>
-    ${msg}
-</div>
+    <div class="alert alert-success alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert"
+                aria-hidden="true">
+            &times;
+        </button>
+            ${msg}
+    </div>
 </c:if>
 
 <div id="main"></div>

@@ -14,11 +14,10 @@ public interface TestService {
 
     /**
      * 创建测试
-     * @param username 创建人名
      * @param createTestVO 测试参数
      * @return
      */
-    Integer createTest(String username, CreateTestVO createTestVO);
+    Integer createTest(CreateTestVO createTestVO);
 
     /**
      * 执行测试
@@ -30,5 +29,7 @@ public interface TestService {
     List<Test> searchTestLikeName(String name);
 
     void DeleteTestBy(Integer id);
+
+    Test getTestById(Integer id);
 
 }

@@ -32,4 +32,10 @@
         from test
         where name = #{testName,jdbcType=VARCHAR};
     </select>
+
+    <select id="getTestById" resultMap="baseResultMap">
+        select *
+        from test
+        where id = #{id,jdbcType=INTEGER};
+    </select>
 </mapper>

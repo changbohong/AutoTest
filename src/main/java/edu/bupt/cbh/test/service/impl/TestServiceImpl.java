@@ -26,11 +26,11 @@ public class TestServiceImpl implements TestService {
     private UserDao userDao;
 
     @Override
-    public Integer createTest(String username, CreateTestVO createTestVO) {
+    public Integer createTest(CreateTestVO createTestVO) {
         Test test = new Test();
-        User user = userDao.getUserByUsername(username);
-        Integer userId = user.getId();
-        test.setUserId(userId);
+        User user = userDao.getUserByUsername(createTestVO.getUsername());
+        test.setUser(user);
+        test.setUserId(user.getId());
         test.setName(createTestVO.getName());
         test.setCreateTime(new Date());
         test.setExcuteTime(createTestVO.getExcuteTime());
@@ -59,5 +59,10 @@ public class TestServiceImpl implements TestService {
     @Override
     public void executeTest() {
         System.out.println("executeTest " + testDao.getCurrentDate());
+    }
+
+    @Override
+    public Test getTestById(Integer id) {
+        return testDao.getTestById(id);
     }
 }

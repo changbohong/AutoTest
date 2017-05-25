@@ -7,6 +7,8 @@ import java.util.Date;
  */
 public class CreateTestVO {
 
+    private String username;
+
     private String name;
 
     private Integer isExcuteNow;
@@ -35,5 +37,13 @@ public class CreateTestVO {
 
     public void setExcuteTime(Date excuteTime) {
         this.excuteTime = excuteTime;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

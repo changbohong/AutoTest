@@ -42,7 +42,7 @@
         <div class="form-group">
             <label for="username" class="col-sm-2 control-label">创建人员</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="username" value="${username}" readonly>
+                <input type="text" class="form-control" id="username" value="${username}" name="username" readonly>
             </div>
         </div>
 
@@ -99,14 +99,6 @@
                 todayBtn: true
             });
         </script>
-
-        <div class="form-group">
-            <label for="msg" class="col-sm-2 control-label">msg</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="msg" value="${msg}" readonly>
-            </div>
-        </div>
-
 
         <%--<div id="freqs" class="form-group">--%>
         <%--<label class="control-label col-md-2" for="freqs">常旅客：</label>--%>

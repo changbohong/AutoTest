@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta name="viewport" http-equiv="Content-Type" content="text/html" charset="UTF-8">
-    <title>创建测试</title>
+    <title>测试详情</title>
     <!-- 引入 Bootstrap -->
     <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
@@ -47,16 +47,9 @@
         </div>
 
         <div class="form-group">
-            <label for="currentTime" class="col-sm-2 control-label">当前时间</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="currentTime" value="${currentTime}" readonly>
-            </div>
-        </div>
-
-        <div class="form-group">
             <label for="testname" class="col-sm-2 control-label">测试名称</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="testname" placeholder="请输入测试名称" value="${name}" name="name">
+                <input type="text" class="form-control" id="testname" placeholder="请输入测试名称" value="${name}" name="name" readonly>
             </div>
         </div>
 

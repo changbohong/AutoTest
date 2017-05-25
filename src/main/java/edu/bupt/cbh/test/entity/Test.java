@@ -1,6 +1,7 @@
 package edu.bupt.cbh.test.entity;
 
 import edu.bupt.cbh.common.Constants;
+import edu.bupt.cbh.user.entity.User;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -14,8 +15,6 @@ public class Test {
     //一次测试包含多个测试用例
     //例如一次测试可以先测注册，后测表单
     private Integer id;
-
-    private Integer userId;
 
     private String name;
 
@@ -31,11 +30,25 @@ public class Test {
     //执行时间
     private Date excuteTime = null;
 
+    private Integer userId;
 
+    private User user;
 
+    public Integer getUserId() {
+        return userId;
+    }
 
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
+    public User getUser() {
+        return user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Integer getId() {
         return id;
@@ -61,13 +74,6 @@ public class Test {
         this.excuteTime = excuteTime;
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
 
     public Boolean getIsExcuteNow() {
         return isExcuteNow;
