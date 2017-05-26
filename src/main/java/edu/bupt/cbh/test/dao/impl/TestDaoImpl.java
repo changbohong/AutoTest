@@ -36,6 +36,6 @@ public class TestDaoImpl extends BaseDaoImpl implements TestDao {
 
     @Override
     public Test getTestById(Integer id) {
-        return sqlSessionTemplate.selectOne(this.getNameSpace() + "getTestById", id);
+        return sqlSessionTemplate.selectOne(this.getNameSpace() + ".getTestById", id);
     }
 }

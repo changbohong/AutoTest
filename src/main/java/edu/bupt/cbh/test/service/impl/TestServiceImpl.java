@@ -34,6 +34,7 @@ public class TestServiceImpl implements TestService {
         test.setName(createTestVO.getName());
         test.setCreateTime(new Date());
         test.setExcuteTime(createTestVO.getExcuteTime());
+        test.setIsExcuteNow(createTestVO.getIsExcuteNow());
         testDao.insertTest(test);
         return test.getId();
     }

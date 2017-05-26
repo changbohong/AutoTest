@@ -11,7 +11,7 @@ public class CreateTestVO {
 
     private String name;
 
-    private Integer isExcuteNow;
+    private Boolean isExcuteNow;
 
     private Date excuteTime;
 
@@ -23,11 +23,11 @@ public class CreateTestVO {
         this.name = name;
     }
 
-    public Integer getIsExcuteNow() {
+    public Boolean getIsExcuteNow() {
         return isExcuteNow;
     }
 
-    public void setIsExcuteNow(Integer isExcuteNow) {
+    public void setIsExcuteNow(Boolean isExcuteNow) {
         this.isExcuteNow = isExcuteNow;
     }
 

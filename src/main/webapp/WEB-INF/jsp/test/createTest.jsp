@@ -64,13 +64,13 @@
             <label for="optionsRadios1" class="col-sm-2 control-label">执行方案</label>
             <div class="col-sm-10">
                 <div class="radio">
-                    <label><input type="radio" name="isExcuteNow" id="optionsRadios1" value="1" checked> 立即执行</label>
+                    <label><input type="radio" name="isExcuteNow" id="optionsRadios1" value="true" checked> 立即执行</label>
                 </div>
             </div>
             <label for="optionsRadios2" class="col-sm-2 control-label">&nbsp</label>
             <div class="col-sm-10">
                 <div class="radio">
-                    <label><input type="radio" name="isExcuteNow" id="optionsRadios2" value="-1"> 定时执行</label>
+                    <label><input type="radio" name="isExcuteNow" id="optionsRadios2" value="false"> 定时执行</label>
                 </div>
             </div>
         </div>

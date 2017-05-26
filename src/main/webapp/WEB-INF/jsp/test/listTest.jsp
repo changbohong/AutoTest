@@ -38,9 +38,9 @@
                 <td>${test.name}</td>
                 <td>${test.excuted}</td>
                 <td>
-                    <a href="/test/testDetails?test.id=${test.id}" target="_blank">详情</a>
+                    <a href="/test/testDetails?id=${test.id}" target="_blank">详情</a>
                     <c:if test="${test.excuted!=true}">
-                        &nbsp;/&nbsp;<a href="/test/testDetails?test.id=${test.id}" target="_blank">修改</a>
+                        &nbsp;/&nbsp;<a href="/test/testDetails?id=${test.id}" target="_blank">修改</a>
                     </c:if>
                     <c:if test="${test.excuted==true}">
                         &nbsp;/&nbsp;<a href="/test/testDetails?test.id=${test.id}" target="_blank">查看报告</a>

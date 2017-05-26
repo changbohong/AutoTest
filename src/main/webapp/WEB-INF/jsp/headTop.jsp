@@ -20,9 +20,7 @@
             </div>
             <div class="collapse navbar-collapse" id="example-navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="/"><span class="glyphicon glyphicon-home"></span> 主页</a></li>
-                    <li><a href="/test/toCreate" target="_blank"><span class="glyphicon glyphicon-plus"></span> 创建测试</a></li>
-                    <li><a href="#support"><span class="glyphicon glyphicon-headphones"></span> Support</a></li>
+                    <li><a href="/"><span class="glyphicon glyphicon-home"></span> 主页</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
