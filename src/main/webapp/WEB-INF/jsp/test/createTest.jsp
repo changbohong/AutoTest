@@ -19,18 +19,6 @@
     <%--<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css"     rel="stylesheet">--%>
     <%--<link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">--%>
 
-    <!-- 点击"#add",向"#target"添加内容-->
-    <script>
-        $(function () {
-            var freq = "<div class='col-md-offset-2 col-md-9' style='padding-top:10px;'>"
-                + "<input type='text' class='form-control' name='client.frequentFlyers'>"
-                + "</div>";
-            $("#add").click(function () {
-                $("#freqs").append(freq);
-            });
-        });
-    </script>
-
 
 </head>
 <body>
@@ -80,15 +68,11 @@
             <label for="form_datetime" class="col-sm-2 control-label">执行时间</label>
             <div class="col-sm-10">
                 <div class="input-append date form_datetime" id="form_datetime" data-date-format="yyyy-mm-dd hh:ii">
-                    <input type="text" value="" name="excuteTime" class="form-control" readonly>
+                    <input type="text" value="" name="excuteTime" class="form-control" placeholder="点击即可输入时间" readonly>
                     <span class="add-on"><i class="icon-th"></i></span>
                 </div>
             </div>
         </div>
-
-        <%--<script type="text/javascript">--%>
-        <%--$(".form_datetime").datetimepicker({format: 'yyyy-mm-dd hh:ii'});--%>
-        <%--</script>--%>
 
         <!-- datetimepicker-->
         <script type="text/javascript">
@@ -100,36 +84,106 @@
             });
         </script>
 
-        <%--<div id="freqs" class="form-group">--%>
-        <%--<label class="control-label col-md-2" for="freqs">常旅客：</label>--%>
-        <%--<div class="col-md-9">--%>
-        <%--<input type="text" class="form-control" name="">--%>
-        <%--</div>--%>
-        <%--<div class="col-md-1">--%>
-        <%--<button class="btn btn-success" id="add" type="button">--%>
-        <%--<span class="glyphicon glyphicon-plus"></span>--%>
-        <%--</button>--%>
-        <%--</div>--%>
-        <%--</div>--%>
+        <!-- 点击"#add",向"#target"添加内容-->
+        <script>
+            $(function () {
+                var testingNo = 2;
+                $("#add").click(function () {
+                    var testing =
+                        "<hr>"
+                        + "<div class='form-group'>"
+                            + "<label class='col-sm-2 control-label'>测试过程编号</label>"
+                            + "<div class='col-sm-10'>"
+                                + "<input type='text' class='form-control' value='"+testingNo+"' name='testingList["+(testingNo - 1)+"].id' readonly>"
+                            + "</div>"
+                        + "</div>"
+                        + "<div class='form-group'>"
+                            + "<label class='col-sm-2 control-label'>测试过程名称</label>"
+                            + "<div class='col-sm-10'>"
+                                + "<input type='text' class='form-control' value='' placeholder='请输入测试过程名称' name='testingList["+(testingNo - 1)+"].testingName'>"
+                            + "</div>"
+                        + "</div>"
+                        + "<div class='form-group'>"
+                            + "<label class='col-sm-2 control-label'>测试过程URL</label>"
+                            + "<div class='col-sm-10'>"
+                                + "<input type='text' class='form-control' value='' placeholder='请输入测试过程URL' name='testingList["+(testingNo - 1)+"].url'>"
+                            + "</div>"
+                        + "</div>"
+                        + "<div class='form-group'>"
+                            + "<label class='col-sm-2 control-label'>测试过程输入</label>"
+                            + "<div class='col-sm-10'>"
+                                + "<input type='text' class='form-control' value='' placeholder='请输入测试过程输入' name='testingList["+(testingNo - 1)+"].input'>"
+                            + "</div>"
+                        + "</div>"
+                        + "<div class='form-group'>"
+                            + "<label class='col-sm-2 control-label'>测试过程预期输出</label>"
+                            + "<div class='col-sm-10'>"
+                                + "<input type='text' class='form-control' value='' placeholder='请输入测试过程预期输出' name='testingList["+(testingNo - 1)+"].expectOutput'>"
+                            + "</div>"
+                        + "</div>";
 
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default">创建</button>
+
+
+
+
+                    $("#testings").append(testing);
+                    testingNo++;
+                });
+            });
+        </script>
+
+        <div id="testings">
+            <hr>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">测试过程编号</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control"  value="1" name="testingList[0]" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">测试过程名称</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" placeholder="请输入测试过程名称" value="" name="testingList[0].testingName">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">测试过程URL</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" placeholder="请输入测试过程URL" value="" name="testingList[0].url">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">测试过程输入</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" placeholder="请输入测试过程输入" value="" name="testingList[0].input">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">测试过程预期输出</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" placeholder="请输入测试过程输出" value="" name="testingList[0].expectOutput">
+                </div>
+            </div>
+        </div>
+
+        <div id="test">
+            <hr>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="button" id="add" class="btn btn-default">
+                        <span class="glyphicon glyphicon-plus"/> 添加测试过程
+                    </button>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default">
+                        <span class="glyphicon glyphicon-ok"/> 完成创建
+                    </button>
+                </div>
             </div>
         </div>
     </form>
-
-    <%--<div class="control-group">--%>
-    <%--<label class="control-label">DateTime Picking</label>--%>
-    <%--<div class="controls input-append date form_datetime" data-date="1979-09-16T05:25:07Z"--%>
-    <%--data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">--%>
-    <%--<input size="16" type="text" value="" name="excuteTime" readonly>--%>
-    <%--<span class="add-on"><i class="icon-remove"></i></span>--%>
-    <%--<span class="add-on"><i class="icon-th"></i></span>--%>
-    <%--</div>--%>
-    <%--<input type="hidden" id="dtp_input1" value=""/><br/>--%>
-    <%--</div>--%>
-
 
 </div>
 

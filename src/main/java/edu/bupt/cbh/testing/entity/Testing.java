@@ -1,6 +1,7 @@
 package edu.bupt.cbh.testing.entity;
 
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -8,11 +9,38 @@ import java.util.List;
  */
 public class Testing {
     private Integer testingId;
-    private URL url;
+    private Integer testId;
+    private String url;
     private String testingName;
-    private List<String> inputList;
-    private List<String> expectOutputList;
-    private List<String> outputList;
+    private String input;
+    private String expectOutput;
+    private String output;
+    private Boolean excuted;
+    private Date excuteTime;
+
+    public Boolean getExcuted() {
+        return excuted;
+    }
+
+    public void setExcuted(Boolean excuted) {
+        this.excuted = excuted;
+    }
+
+    public Date getExcuteTime() {
+        return excuteTime;
+    }
+
+    public void setExcuteTime(Date excuteTime) {
+        this.excuteTime = excuteTime;
+    }
+
+    public Integer getTestId() {
+        return testId;
+    }
+
+    public void setTestId(Integer testId) {
+        this.testId = testId;
+    }
 
     public Integer getTestingId() {
         return testingId;
@@ -22,11 +50,11 @@ public class Testing {
         this.testingId = testingId;
     }
 
-    public URL getUrl() {
+    public String getUrl() {
         return url;
     }
 
-    public void setUrl(URL url) {
+    public void setUrl(String url) {
         this.url = url;
     }
 
@@ -38,27 +66,27 @@ public class Testing {
         this.testingName = testingName;
     }
 
-    public List<String> getInputList() {
-        return inputList;
+    public String getInput() {
+        return input;
     }
 
-    public void setInputList(List<String> inputList) {
-        this.inputList = inputList;
+    public void setInput(String input) {
+        this.input = input;
     }
 
-    public List<String> getExpectOutputList() {
-        return expectOutputList;
+    public String getExpectOutput() {
+        return expectOutput;
     }
 
-    public void setExpectOutputList(List<String> expectOutputList) {
-        this.expectOutputList = expectOutputList;
+    public void setExpectOutput(String expectOutput) {
+        this.expectOutput = expectOutput;
     }
 
-    public List<String> getOutputList() {
-        return outputList;
+    public String getOutput() {
+        return output;
     }
 
-    public void setOutputList(List<String> outputList) {
-        this.outputList = outputList;
+    public void setOutput(String output) {
+        this.output = output;
     }
 }

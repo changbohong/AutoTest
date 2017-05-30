@@ -28,7 +28,7 @@ public class Test {
     private Boolean isExcuteNow = Constants.TestCons.EXCUTE_NOW;
 
     //执行时间
-    private Date excuteTime = null;
+    private Date excuteTime;
 
     private Integer userId;
 

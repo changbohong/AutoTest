@@ -6,6 +6,7 @@
         <typeAlias alias="User" type="edu.bupt.cbh.user.entity.User"/>
         <typeAlias alias="RegistTestTemplate" type="edu.bupt.cbh.template.entity.RegistTestTemplate"/>
         <typeAlias alias="Test" type="edu.bupt.cbh.test.entity.Test"/>
+        <typeAlias alias="Testing" type="edu.bupt.cbh.testing.entity.Testing"/>
     </typeAliases>
 
 </configuration>

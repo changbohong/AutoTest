@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.bupt.cbh.testing.dao.impl.TestingDaoImpl">
+    <resultMap id="baseResultMap" type="Testing">
+        <result property="testingId" column="testing_id" jdbcType="INTEGER"/>
+        <result property="testId" column="test_id" jdbcType="INTEGER"/>
+        <result property="url" column="url" jdbcType="VARCHAR"/>
+        <result property="testingName" column="testing_name" jdbcType="VARCHAR"/>
+        <result property="input" column="input" jdbcType="VARCHAR"/>
+        <result property="expectOutput" column="expect_output" jdbcType="VARCHAR"/>
+        <result property="output" column="output" jdbcType="VARCHAR"/>
+        <result property="excuteTime" column="excute_time" jdbcType="DATE"/>
+        <result property="excuted" column="excuted" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="testing_column_list">
+        test_id,url,testing_name,input,expect_output,output,excuted,excute_time
+    </sql>
+
+    <insert id="insertTestingList" parameterType="Testing" useGeneratedKeys="true" keyProperty="testing_id">
+    insert
+    into test(<include refid="testing_column_list"/>)
+        <foreach collection="list" item="item" index="index" separator="," >
+        values(#{item.testId},#{item.url},#{item.testingName},#{item.input},#{item.expectOutput},#{item.output},#{item.excuted},#{excuteTime})
+        </foreach>
+    </insert>
+
+    <select id="searchTestLikeName" resultMap="baseResultMap">
+        select *
+        from test
+        where name LIKE CONCAT('%',#{testName,jdbcType=VARCHAR},'%');
+    </select>
+
+    <select id="searchTestByName" resultMap="baseResultMap">
+        select *
+        from test
+        where name = #{testName,jdbcType=VARCHAR};
+    </select>
+
+    <select id="getTestById" resultMap="baseResultMap">
+        select *
+        from test
+        where id = #{id,jdbcType=INTEGER};
+    </select>
+</mapper>

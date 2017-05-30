@@ -49,6 +49,7 @@ public class TestController {
 
     @RequestMapping(value = "/createTest", method = RequestMethod.POST)
     public ModelAndView createTest(CreateTestVO createTestVO) {
+        //先保存Test
         ModelAndView modelAndView = new ModelAndView("main/main");
         Integer testId = testService.createTest(createTestVO);
         if (testId == null) {
@@ -57,6 +58,8 @@ public class TestController {
             System.out.println(msg);
             return modelAndView;
         }
+        //后保存TestingList
+
         modelAndView.addObject("msg", "创建成功");
         return modelAndView;
     }

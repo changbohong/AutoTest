@@ -1,6 +1,9 @@
 package edu.bupt.cbh.test.vo;
 
+import edu.bupt.cbh.testing.entity.Testing;
+
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by scarlett on 2017/5/23.
@@ -14,6 +17,16 @@ public class CreateTestVO {
     private Boolean isExcuteNow;
 
     private Date excuteTime;
+
+    private List<Testing> testingList;
+
+    public List<Testing> getTestingList() {
+        return testingList;
+    }
+
+    public void setTestingList(List<Testing> testingList) {
+        this.testingList = testingList;
+    }
 
     public String getName() {
         return name;
