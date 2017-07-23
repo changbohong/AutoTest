@@ -40,7 +40,7 @@
 </div>
 <div class="container">
 
-    <form class="form-horizontal" role="form" method="post" action="/test/createTest">
+    <form class="form-horizontal" role="form">
 
         <div class="form-group">
             <label for="username" class="col-sm-2 control-label">创建人员</label>

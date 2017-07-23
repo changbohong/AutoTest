@@ -4,6 +4,8 @@ import edu.bupt.cbh.common.Constants;
 import edu.bupt.cbh.test.entity.Test;
 import edu.bupt.cbh.test.service.TestService;
 import edu.bupt.cbh.test.vo.CreateTestVO;
+import edu.bupt.cbh.testing.entity.Testing;
+import edu.bupt.cbh.testing.service.TestingService;
 import edu.bupt.cbh.user.service.UserService;
 import org.omg.CORBA.INTERNAL;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +14,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by scarlett on 2017/5/22.
@@ -28,6 +34,9 @@ public class TestController {
 
     @Autowired
     private TestService testService;
+
+    @Autowired
+    private TestingService testingService;
 
     @Autowired
     private UserService userService;
@@ -49,7 +58,7 @@ public class TestController {
 
     @RequestMapping(value = "/createTest", method = RequestMethod.POST)
     public ModelAndView createTest(CreateTestVO createTestVO) {
-        //先保存Test
+        //保存Test
         ModelAndView modelAndView = new ModelAndView("main/main");
         Integer testId = testService.createTest(createTestVO);
         if (testId == null) {
@@ -58,8 +67,6 @@ public class TestController {
             System.out.println(msg);
             return modelAndView;
         }
-        //后保存TestingList
-
         modelAndView.addObject("msg", "创建成功");
         return modelAndView;
     }
@@ -88,6 +95,37 @@ public class TestController {
         ModelAndView modelAndView = new ModelAndView("test/testDetails");
         Test test = testService.getTestById(id);
         modelAndView.addObject("test", test);
+        return modelAndView;
+    }
+
+    @RequestMapping("/testRun")
+    public ModelAndView testRun(Integer testId) {
+        ModelAndView modelAndView = new ModelAndView("main/main");
+        //获得所有测试单元
+        Test test = testService.getTestById(testId);
+        String baseUrl = test.getUrl();
+        List<Testing> testingList = testingService.getAllTestings(testId);
+        //依次执行
+        for (Testing testing : testingList){
+            String targetUrl = testing.getUrl();
+            //获得测试单元的输入
+            Map<String , Object> params = testingService.getInputMap(testing.getTestingId());
+            //执行测试单元
+            Map<String , Object> result = testService.testRun(baseUrl , targetUrl , params);
+            //执行结果写回
+            testingService.insertOutPutMap(result , testing.getTestingId());
+        }
+
+//        RestTemplate restTemplate = new RestTemplate();
+//        String url = "http://192.168.1.104:8080/hiservice/test/login";
+//        Map<String, String> params = new HashMap<>();
+//        params.put("username", "admin");
+//        params.put("password", "123456");
+//        Map<String, Object> response =  restTemplate.postForObject(url,params, Map.class);
+
+//        int code = Integer.parseInt(String.valueOf(response.getOrDefault("code", 1)));
+
+//        modelAndView.addObject("msg", code);
         return modelAndView;
     }
 

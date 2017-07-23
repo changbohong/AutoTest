@@ -1,6 +1,7 @@
 package edu.bupt.cbh.test.dao;
 
 import edu.bupt.cbh.test.entity.Test;
+import edu.bupt.cbh.testing.entity.Testing;
 
 import java.util.Date;
 import java.util.List;
@@ -26,6 +27,8 @@ public interface TestDao {
      * @return
      */
     List<Test> searchTestByName(String testName);
+
+
 
     Test getTestById(Integer id);
 }

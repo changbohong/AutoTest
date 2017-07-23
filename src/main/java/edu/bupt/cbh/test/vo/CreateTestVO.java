@@ -14,19 +14,11 @@ public class CreateTestVO {
 
     private String name;
 
+    private String url;
+
     private Boolean isExcuteNow;
 
     private Date excuteTime;
-
-    private List<Testing> testingList;
-
-    public List<Testing> getTestingList() {
-        return testingList;
-    }
-
-    public void setTestingList(List<Testing> testingList) {
-        this.testingList = testingList;
-    }
 
     public String getName() {
         return name;
@@ -58,5 +50,13 @@ public class CreateTestVO {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

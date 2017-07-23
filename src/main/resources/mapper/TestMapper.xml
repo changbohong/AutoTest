@@ -5,6 +5,7 @@
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="userId" column="user_id" jdbcType="INTEGER"/>
         <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="url" column="url" jdbcType="VARCHAR"/>
         <result property="createTime" column="create_time" jdbcType="DATE"/>
         <result property="excuteTime" column="excute_time" jdbcType="DATE"/>
         <result property="excuted" column="excuted" jdbcType="TINYINT"/>
@@ -18,7 +19,7 @@
     <insert id="insertTest" parameterType="Test" useGeneratedKeys="true" keyProperty="id">
     insert
     into test(<include refid="test_column_list"/>)
-    values(#{userId},#{name},#{excuted},#{createTime},#{isExcuteNow},#{excuteTime})
+    values(#{userId},#{name},#{excuted},#{createTime},#{isExcuteNow},#{excuteTime},#{url})
     </insert>
 
     <select id="searchTestLikeName" resultMap="baseResultMap">
@@ -38,4 +39,5 @@
         from test
         where id = #{id,jdbcType=INTEGER};
     </select>
+
 </mapper>

@@ -30,9 +30,19 @@ public class Test {
     //执行时间
     private Date excuteTime;
 
+    private String url;
+
     private Integer userId;
 
     private User user;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public Integer getUserId() {
         return userId;

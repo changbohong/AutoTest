@@ -9,5 +9,12 @@ import java.util.List;
  */
 public interface TestingDao {
 
-    void insertTestingList(List<Testing> testingList);
+    Integer addTesting(Testing testing);
+
+    /**
+     * 获得此测试下所有测试单元
+     * @param testId
+     * @return
+     */
+    List<Testing> getAllTestings(Integer testId);
 }

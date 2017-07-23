@@ -2,10 +2,9 @@ package edu.bupt.cbh.test.service;
 
 import edu.bupt.cbh.test.entity.Test;
 import edu.bupt.cbh.test.vo.CreateTestVO;
-import edu.bupt.cbh.user.entity.User;
 
-import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by scarlett on 2017/5/22.
@@ -19,11 +18,6 @@ public interface TestService {
      */
     Integer createTest(CreateTestVO createTestVO);
 
-    /**
-     * 执行测试
-     */
-    void executeTest();
-
     List<Test> searchTestByName(String name);
 
     List<Test> searchTestLikeName(String name);
@@ -31,5 +25,14 @@ public interface TestService {
     void DeleteTestBy(Integer id);
 
     Test getTestById(Integer id);
+
+    /**
+     * 执行测试
+     * @param baseUrl
+     * @param targetUrl
+     * @param params
+     * @return
+     */
+    Map<String, Object> testRun(String baseUrl , String targetUrl , Map<String, Object> params);
 
 }

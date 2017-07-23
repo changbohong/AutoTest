@@ -4,14 +4,17 @@ import edu.bupt.cbh.test.dao.TestDao;
 import edu.bupt.cbh.test.entity.Test;
 import edu.bupt.cbh.test.service.TestService;
 import edu.bupt.cbh.test.vo.CreateTestVO;
+import edu.bupt.cbh.testing.entity.Testing;
 import edu.bupt.cbh.user.dao.UserDao;
 import edu.bupt.cbh.user.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by scarlett on 2017/5/22.
@@ -29,6 +32,7 @@ public class TestServiceImpl implements TestService {
     public Integer createTest(CreateTestVO createTestVO) {
         Test test = new Test();
         User user = userDao.getUserByUsername(createTestVO.getUsername());
+        test.setUrl(createTestVO.getUrl());
         test.setUser(user);
         test.setUserId(user.getId());
         test.setName(createTestVO.getName());
@@ -58,12 +62,16 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
-    public void executeTest() {
-        System.out.println("executeTest " + testDao.getCurrentDate());
+    public Map<String, Object> testRun(String baseUrl, String targetUrl , Map<String, Object> params) {
+        RestTemplate restTemplate = new RestTemplate();
+        String url = baseUrl + targetUrl;
+        return restTemplate.postForObject(url,params, Map.class);
     }
 
     @Override
     public Test getTestById(Integer id) {
         return testDao.getTestById(id);
     }
+
+
 }

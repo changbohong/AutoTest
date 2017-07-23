@@ -3,6 +3,7 @@ package edu.bupt.cbh.test.dao.impl;
 import edu.bupt.cbh.common.dao.BaseDaoImpl;
 import edu.bupt.cbh.test.dao.TestDao;
 import edu.bupt.cbh.test.entity.Test;
+import edu.bupt.cbh.testing.entity.Testing;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -33,6 +34,8 @@ public class TestDaoImpl extends BaseDaoImpl implements TestDao {
     public List<Test> searchTestByName(String testName) {
         return sqlSessionTemplate.selectList(this.getNameSpace() + ".searchTestByName", testName);
     }
+
+
 
     @Override
     public Test getTestById(Integer id) {

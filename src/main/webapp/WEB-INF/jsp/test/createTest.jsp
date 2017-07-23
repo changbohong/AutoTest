@@ -49,6 +49,13 @@
         </div>
 
         <div class="form-group">
+            <label for="testname" class="col-sm-2 control-label">测试地址</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="url" placeholder="请输入测试地址" value="${url}" name="url">
+            </div>
+        </div>
+
+        <div class="form-group">
             <label for="optionsRadios1" class="col-sm-2 control-label">执行方案</label>
             <div class="col-sm-10">
                 <div class="radio">
@@ -84,97 +91,10 @@
             });
         </script>
 
-        <!-- 点击"#add",向"#target"添加内容-->
-        <script>
-            $(function () {
-                var testingNo = 2;
-                $("#add").click(function () {
-                    var testing =
-                        "<hr>"
-                        + "<div class='form-group'>"
-                            + "<label class='col-sm-2 control-label'>测试过程编号</label>"
-                            + "<div class='col-sm-10'>"
-                                + "<input type='text' class='form-control' value='"+testingNo+"' name='testingList["+(testingNo - 1)+"].id' readonly>"
-                            + "</div>"
-                        + "</div>"
-                        + "<div class='form-group'>"
-                            + "<label class='col-sm-2 control-label'>测试过程名称</label>"
-                            + "<div class='col-sm-10'>"
-                                + "<input type='text' class='form-control' value='' placeholder='请输入测试过程名称' name='testingList["+(testingNo - 1)+"].testingName'>"
-                            + "</div>"
-                        + "</div>"
-                        + "<div class='form-group'>"
-                            + "<label class='col-sm-2 control-label'>测试过程URL</label>"
-                            + "<div class='col-sm-10'>"
-                                + "<input type='text' class='form-control' value='' placeholder='请输入测试过程URL' name='testingList["+(testingNo - 1)+"].url'>"
-                            + "</div>"
-                        + "</div>"
-                        + "<div class='form-group'>"
-                            + "<label class='col-sm-2 control-label'>测试过程输入</label>"
-                            + "<div class='col-sm-10'>"
-                                + "<input type='text' class='form-control' value='' placeholder='请输入测试过程输入' name='testingList["+(testingNo - 1)+"].input'>"
-                            + "</div>"
-                        + "</div>"
-                        + "<div class='form-group'>"
-                            + "<label class='col-sm-2 control-label'>测试过程预期输出</label>"
-                            + "<div class='col-sm-10'>"
-                                + "<input type='text' class='form-control' value='' placeholder='请输入测试过程预期输出' name='testingList["+(testingNo - 1)+"].expectOutput'>"
-                            + "</div>"
-                        + "</div>";
 
-
-
-
-
-                    $("#testings").append(testing);
-                    testingNo++;
-                });
-            });
-        </script>
-
-        <div id="testings">
-            <hr>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">测试过程编号</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control"  value="1" name="testingList[0]" readonly>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">测试过程名称</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="请输入测试过程名称" value="" name="testingList[0].testingName">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">测试过程URL</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="请输入测试过程URL" value="" name="testingList[0].url">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">测试过程输入</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="请输入测试过程输入" value="" name="testingList[0].input">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">测试过程预期输出</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="请输入测试过程输出" value="" name="testingList[0].expectOutput">
-                </div>
-            </div>
-        </div>
 
         <div id="test">
             <hr>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="button" id="add" class="btn btn-default">
-                        <span class="glyphicon glyphicon-plus"/> 添加测试过程
-                    </button>
-                </div>
-            </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <button type="submit" class="btn btn-default">
