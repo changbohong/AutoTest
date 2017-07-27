@@ -12,7 +12,7 @@
         test_id,output_key,output_value
     </sql>
 
-    <insert id="insetOutput" parameterType="TestingOutput" useGeneratedKeys="true" keyProperty="output_id">
+    <insert id="insertOutput" parameterType="TestingOutput" useGeneratedKeys="true" keyProperty="output_id">
         insert
         into output_table(<include refid="output_column_list"/>)
             values(#{testing_id},#{output_key},#{output_value)
