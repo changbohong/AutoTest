@@ -18,10 +18,10 @@
             values(#{testing_id},#{input_key},#{input_value)
     </insert>
 
-    <select id="getInputs" resultMap="baseResultMap">
+    <select id="getInputList" resultMap="baseResultMap">
         select *
         from input_table
-        where testing_Id = #{testing_Id,jdbcType=INTEGER};
+        where testing_id = #{testingId,jdbcType=INTEGER};
     </select>
 
 </mapper>
