@@ -1,14 +1,14 @@
 package edu.bupt.cbh.test.dao;
 
 import edu.bupt.cbh.test.entity.Test;
-import edu.bupt.cbh.testing.entity.Testing;
+import org.springframework.stereotype.Repository;
 
-import java.util.Date;
 import java.util.List;
 
 /**
  * Created by scarlett on 2017/5/22.
  */
+@Repository
 public interface TestDao {
     Integer insertTest(Test test);
 

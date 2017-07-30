@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="edu.bupt.cbh.testing.dao.impl.TestingDaoImpl">
+<mapper namespace="edu.bupt.cbh.testing.dao.TestingDao">
     <resultMap id="baseResultMap" type="Testing">
         <result property="testingId" column="testing_id" jdbcType="INTEGER"/>
         <result property="testId" column="test_id" jdbcType="INTEGER"/>

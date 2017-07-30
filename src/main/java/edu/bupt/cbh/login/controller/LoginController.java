@@ -1,6 +1,7 @@
 package edu.bupt.cbh.login.controller;
 
 import edu.bupt.cbh.template.service.InitTemplatDataBaseeService;
+import edu.bupt.cbh.user.dao.UserDao;
 import edu.bupt.cbh.user.entity.User;
 import edu.bupt.cbh.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

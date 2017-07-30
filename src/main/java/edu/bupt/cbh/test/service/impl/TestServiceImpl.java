@@ -6,15 +6,12 @@ import edu.bupt.cbh.test.entity.TestResult;
 import edu.bupt.cbh.test.service.TestService;
 import edu.bupt.cbh.test.vo.CreateTestVO;
 import edu.bupt.cbh.testing.entity.Testing;
-import edu.bupt.cbh.testing.entity.TestingInput;
 import edu.bupt.cbh.testing.service.TestingService;
 import edu.bupt.cbh.user.dao.UserDao;
 import edu.bupt.cbh.user.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;

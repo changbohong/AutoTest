@@ -1,13 +1,14 @@
 package edu.bupt.cbh.testing.dao;
 
 import edu.bupt.cbh.testing.entity.Testing;
-import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * Created by scarlett on 2017/5/26.
  */
+@Repository
 public interface TestingDao {
 
     Integer addTesting(Testing testing);
