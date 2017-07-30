@@ -12,6 +12,8 @@ import java.util.List;
 public interface TestDao {
     Integer insertTest(Test test);
 
+    Integer updateTest(Test test);
+
     String getCurrentDate();
 
     /**

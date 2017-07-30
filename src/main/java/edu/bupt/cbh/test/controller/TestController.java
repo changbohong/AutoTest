@@ -100,6 +100,18 @@ public class TestController {
     }
 
     /**
+     * 执行测试
+     * @param testId
+     * @return
+     */
+    @RequestMapping("/testRun")
+    public ModelAndView testRun(Integer testId) {
+        ModelAndView modelAndView = new ModelAndView("main/main");
+        testService.testRun(testId);
+        return modelAndView;
+    }
+
+    /**
      * 生成测试报告
      *
      * @param testId
@@ -110,32 +122,6 @@ public class TestController {
         ModelAndView modelAndView = new ModelAndView("test/testReport");
         TestResult testResult = testService.createTestReport(testId);
         modelAndView.addObject("testResult", testResult);
-        return modelAndView;
-    }
-
-    /**
-     * 执行测试
-     * @param testId
-     * @return
-     */
-    @RequestMapping("/testRun")
-    public ModelAndView testRun(Integer testId) {
-        ModelAndView modelAndView = new ModelAndView("main/main");
-        //获得所有测试单元
-        Test test = testService.getTestById(testId);
-        String baseUrl = test.getUrl();
-        List<Testing> testingList = testingService.getAllTestings(testId);
-        //依次执行
-        for (Testing testing : testingList) {
-            String targetUrl = testing.getUrl();
-            //获得测试单元的输入
-            Map<String, Object> params = testingService.getInputMap(testing.getTestingId());
-            //执行测试单元
-            Map<String, Object> result = testService.testRun(baseUrl, targetUrl, params);
-            //执行结果写回
-            testingService.insertOutPutMap(result, testing.getTestingId());
-        }
-
         return modelAndView;
     }
 

@@ -9,16 +9,7 @@ public class ExpectedTestingOutput {
     private Integer testingId;
     private String outputKey;
     private String outputValue;
-    //"正确"，"错误"，"未收到该字段"
-    private String result;
 
-    public String getResult() {
-        return result;
-    }
-
-    public void setResult(String result) {
-        this.result = result;
-    }
 
     public Integer getTestingId() {
         return testingId;

@@ -8,17 +8,24 @@
         <result property="testingName" column="testing_name" jdbcType="VARCHAR"/>
         <result property="excuteTime" column="excute_time" jdbcType="DATE"/>
         <result property="excuted" column="excuted" jdbcType="TINYINT"/>
+        <result property="result" column="result" jdbcType="TINYINT"/>
     </resultMap>
 
     <sql id="testing_column_list">
-        test_id,url,testing_name,excuted,excute_time
+        test_id,url,testing_name,excuted,excute_time,result
     </sql>
 
     <insert id="addTesting" parameterType="Testing" useGeneratedKeys="true" keyProperty="testing_id">
         insert
         into testing(<include refid="testing_column_list"/>)
-            values(#{testId},#{url},#{testingName},#{excuted},#{excuteTime})
+            values(#{testId},#{url},#{testingName},#{excuted},#{excuteTime},#{result})
     </insert>
+
+    <update id="updateTesting" parameterType="Testing">
+        update testing
+        set result = #{result}
+        where testing_id = #{testingId,jdbcType=INTEGER};
+    </update>
 
     <select id="getAllTestings" resultMap="baseResultMap">
         select *

@@ -13,12 +13,20 @@ public class Testing {
     private Integer testId;
     private String url;
     private String testingName;
-    private Boolean excuted;
     private Date excuteTime;
+    private Boolean result;
 
-    private Map<String,Object> TestingInput;
-    private Map<String,Object> TestingOutput;
-    private Map<String,Object> ExpectedTestingOutput;
+    private Map<String, Object> TestingInput;
+    private Map<String, Object> TestingOutput;
+    private Map<String, Object> ExpectedTestingOutput;
+
+    public Boolean getResult() {
+        return result;
+    }
+
+    public void setResult(Boolean result) {
+        this.result = result;
+    }
 
     public Map<String, Object> getTestingInput() {
         return TestingInput;
@@ -44,13 +52,6 @@ public class Testing {
         ExpectedTestingOutput = expectedTestingOutput;
     }
 
-    public Boolean getExcuted() {
-        return excuted;
-    }
-
-    public void setExcuted(Boolean excuted) {
-        this.excuted = excuted;
-    }
 
     public Date getExcuteTime() {
         return excuteTime;

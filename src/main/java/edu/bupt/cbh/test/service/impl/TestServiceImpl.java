@@ -50,6 +50,11 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
+    public Integer updateTest(Test test) {
+        return testDao.updateTest(test);
+    }
+
+    @Override
     public List<Test> searchTestByName(String name) {
         return testDao.searchTestByName(name);
     }
@@ -68,16 +73,25 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
-    public Map<String, Object> testRun(String baseUrl, String targetUrl, Map<String, Object> params) {
-        RestTemplate restTemplate = new RestTemplate();
-        String url = baseUrl + targetUrl;
-        return restTemplate.postForObject(url, params, Map.class);
+    public void testRun(Integer testId) {
+        Test test = this.getTestById(testId);
+        String baseUrl = test.getUrl();
+        System.out.println("开始执行测试，测试名称：" + test.getName());
+        testingService.testingRun(testId, baseUrl);
+        System.out.println("执行测试完毕，测试名称：" + test.getName());
+        //如果是，则需要手动点击立即执行
+        if (test.getIsExcuteNow()) {
+            test.setExcuteTime(new Date());
+        }
+        test.setExcuted(true);
+        this.updateTest(test);
     }
 
     @Override
     public Test getTestById(Integer id) {
         return testDao.getTestById(id);
     }
+
 
     @Override
     public TestResult createTestReport(Integer testId) {

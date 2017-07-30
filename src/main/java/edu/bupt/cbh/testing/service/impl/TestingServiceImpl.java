@@ -1,5 +1,6 @@
 package edu.bupt.cbh.testing.service.impl;
 
+import edu.bupt.cbh.test.entity.Test;
 import edu.bupt.cbh.testing.dao.ExpectedTestingOutputDao;
 import edu.bupt.cbh.testing.dao.TestingInputDao;
 import edu.bupt.cbh.testing.dao.TestingOutputDao;
@@ -12,6 +13,7 @@ import edu.bupt.cbh.testing.service.TestingService;
 import edu.bupt.cbh.testing.vo.AddTestingVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
 
@@ -67,6 +69,11 @@ public class TestingServiceImpl implements TestingService{
         }
 
         return testingId;
+    }
+
+    @Override
+    public void updateTesting(Testing testing) {
+        testingDao.updateTesting(testing);
     }
 
     @Override
@@ -130,7 +137,32 @@ public class TestingServiceImpl implements TestingService{
         }
     }
 
+    @Override
+    public void testingRun(Integer testId, String baseUrl) {
+        List<Testing> testingList = this.getAllTestings(testId);
+        //依次执行
+        for (Testing testing : testingList) {
+            String targetUrl = testing.getUrl();
+            //获得测试单元的输入
+            Map<String, Object> params = this.getInputMap(testing.getTestingId());
+            //执行测试单元
+            Map<String, Object> outputMap = this.testingRun(baseUrl, targetUrl, params);
+            //执行结果写回
+            this.insertOutPutMap(outputMap, testing.getTestingId());
+            //执行结果与预期结果对比，更新测试单元结果
+            Map<String, Object> expectedoutputMap = this.getExpectedOutputMap(testing.getTestingId());
+            testing.setResult(updateExpectedOutputWithOutput(expectedoutputMap,outputMap));
+            this.updateTesting(testing);
+        }
+    }
 
+    private Map<String, Object> testingRun(String baseUrl, String targetUrl, Map<String, Object> params) {
+        RestTemplate restTemplate = new RestTemplate();
+        String url = baseUrl + targetUrl;
+        return restTemplate.postForObject(url, params, Map.class);
+    }
 
-
+    private Boolean updateExpectedOutputWithOutput(Map<String, Object> expectedoutputMap,Map<String, Object> outputMap){
+        return expectedoutputMap.equals(outputMap);
+    }
 }

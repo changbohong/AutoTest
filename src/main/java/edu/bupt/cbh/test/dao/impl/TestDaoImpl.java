@@ -21,6 +21,11 @@ public class TestDaoImpl extends BaseDaoImpl implements TestDao {
     }
 
     @Override
+    public Integer updateTest(Test test) {
+        return sqlSessionTemplate.update(this.getNameSpace() + ".updateTest", test);
+    }
+
+    @Override
     public String getCurrentDate() {
         return super.getCurrentDate();
     }

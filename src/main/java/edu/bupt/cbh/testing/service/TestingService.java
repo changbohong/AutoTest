@@ -22,6 +22,12 @@ public interface TestingService {
     Integer addTesting(AddTestingVO addTestingVO);
 
     /**
+     * 更新测试单元
+     * @param testing
+     */
+    void updateTesting(Testing testing);
+
+    /**
      * 获得此测试下的所有测试单元
      * @param testId
      * @return
@@ -46,4 +52,11 @@ public interface TestingService {
      * @param outputMap
      */
     void insertOutPutMap(Map<String , Object> outputMap , Integer testingId);
+
+    /**
+     * 执行测试单元
+     * @param testId
+     * @param baseUrl
+     */
+    void testingRun(Integer testId , String baseUrl);
 }

@@ -20,6 +20,11 @@ public class TestingDaoImpl extends BaseDaoImpl implements TestingDao {
     }
 
     @Override
+    public Integer updateTesting(Testing testing) {
+        return sqlSessionTemplate.update(this.getNameSpace() + ".updateTesting", testing);
+    }
+
+    @Override
     public List<Testing> getAllTestings(Integer testId) {
         return sqlSessionTemplate.selectList(this.getNameSpace() + ".getAllTestings", testId);
     }

@@ -11,6 +11,8 @@ public interface TestingDao {
 
     Integer addTesting(Testing testing);
 
+    Integer updateTesting(Testing testing);
+
     /**
      * 获得此测试下所有测试单元
      * @param testId

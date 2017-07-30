@@ -19,6 +19,8 @@ public interface TestService {
      */
     Integer createTest(CreateTestVO createTestVO);
 
+    Integer updateTest(Test test);
+
     List<Test> searchTestByName(String name);
 
     List<Test> searchTestLikeName(String name);
@@ -28,19 +30,15 @@ public interface TestService {
     Test getTestById(Integer id);
 
     /**
-     * 执行测试
-     * @param baseUrl
-     * @param targetUrl
-     * @param params
-     * @return
-     */
-    Map<String, Object> testRun(String baseUrl , String targetUrl , Map<String, Object> params);
-
-    /**
      * 生成测试报告
      * @param testId
      * @return
      */
     TestResult createTestReport(Integer testId);
 
+    /**
+     * 执行测试
+     * @param testId
+     */
+    void testRun(Integer testId);
 }
