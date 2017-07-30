@@ -93,49 +93,49 @@
         <!-- 点击"#add",向"#target"添加内容-->
         <script>
         $(function () {
-        var testingNo = 2;
-        $("#add").click(function () {
-        var testing =
-        "<hr>"
-        + "<div class='form-group'>"
-        + "<label class='col-sm-2 control-label'>测试过程编号</label>"
-        + "<div class='col-sm-10'>"
-        //                                + "<input type='text' class='form-control' value='"+testingNo+"' name='testingList["+(testingNo - 1)+"].id' readonly>"
-        + "<input type='text' class='form-control' value='"+testingNo+"' readonly>"
-        + "</div>"
-        + "</div>"
-        + "<div class='form-group'>"
-        + "<label class='col-sm-2 control-label'>测试过程名称</label>"
-        + "<div class='col-sm-10'>"
-        + "<input type='text' class='form-control' value='' placeholder='请输入测试过程名称' name='testingList["+(testingNo - 1)+"].testingName'>"
-        + "</div>"
-        + "</div>"
-        + "<div class='form-group'>"
-        + "<label class='col-sm-2 control-label'>测试过程URL</label>"
-        + "<div class='col-sm-10'>"
-        + "<input type='text' class='form-control' value='' placeholder='请输入测试过程URL' name='testingList["+(testingNo - 1)+"].url'>"
-        + "</div>"
-        + "</div>"
-        + "<div class='form-group'>"
-        + "<label class='col-sm-2 control-label'>测试过程输入</label>"
-        + "<div class='col-sm-10'>"
-        + "<input type='text' class='form-control' value='' placeholder='请输入测试过程输入' name='testingList["+(testingNo - 1)+"].input'>"
-        + "</div>"
-        + "</div>"
-        + "<div class='form-group'>"
-        + "<label class='col-sm-2 control-label'>测试过程预期输出</label>"
-        + "<div class='col-sm-10'>"
-        + "<input type='text' class='form-control' value='' placeholder='请输入测试过程预期输出' name='testingList["+(testingNo - 1)+"].expectOutput'>"
-        + "</div>"
-        + "</div>";
+            <!--添加测试输入-->
+            var testingInputNO = 1;
+            $("#addTestingInput").click(function () {
+                var testingInput =
+                    "<div class='form-group'>"
+                    + "<label class='col-sm-2 control-label'>输入字段</label>"
+                    + "<div class='col-sm-10'>"
+                    + "<input type='text' class='form-control' placeholder='请输入字段' name='testingInputList[" + (testingInputNO) + "].inputKey'>"
+                    + "</div>"
+                    + "</div>"
+                    + "<div class='form-group'>"
+                    + "<label class='col-sm-2 control-label'>字段值</label>"
+                    + "<div class='col-sm-10'>"
+                    + "<input type='text' class='form-control' placeholder='请输入对应字段值' name='testingInputList[" + (testingInputNO) + "].inputValue'>"
+                    + "</div>"
+                    + "</div>"
+                ;
+                $("#testingInputs").append(testingInput);
+                testingInputNO++;
+            });
+
+            <!--添加测试输入-->
+            var expectedTestingOutputNO = 1;
+            $("#addExpectedTestingOutput").click(function () {
+                var expectedTestingOutput =
+                    "<div class='form-group'>"
+                    + "<label class='col-sm-2 control-label'>预期输出字段</label>"
+                    + "<div class='col-sm-10'>"
+                    + "<input type='text' class='form-control' placeholder='请输入字段' name='expectedTestingOutputList[" + (expectedTestingOutputNO) + "].outputKey'>"
+                    + "</div>"
+                    + "</div>"
+                    + "<div class='form-group'>"
+                    + "<label class='col-sm-2 control-label'>字段值</label>"
+                    + "<div class='col-sm-10'>"
+                    + "<input type='text' class='form-control' placeholder='请输入对应字段值' name='expectedTestingOutputList[" + (expectedTestingOutputNO) + "].outputValue'>"
+                    + "</div>"
+                    + "</div>"
+                ;
+                $("#expectedTestingOutputs").append(expectedTestingOutput);
+                expectedTestingOutputNO++;
+            });
 
 
-
-
-
-        $("#testings").append(testing);
-        testingNo++;
-        });
         });
         </script>
 
@@ -159,7 +159,8 @@
                     <input type="text" class="form-control" placeholder="请输入测试过程URL" value="" name="url">
                 </div>
             </div>
-            <div id="testingInput">
+
+            <div id="testingInputs">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">输入字段</label>
                     <div class="col-sm-10">
@@ -175,7 +176,16 @@
                     </div>
                 </div>
             </div>
-            <div id="expectedTestingOutput">
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="button" id="addTestingInput" class="btn btn-default">
+                        <span class="glyphicon glyphicon-plus"/> 添加更多测试输入
+                    </button>
+                </div>
+            </div>
+
+            <div id="expectedTestingOutputs">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">预期输出字段</label>
                     <div class="col-sm-10">
@@ -191,17 +201,18 @@
                     </div>
                 </div>
             </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="button" id="addExpectedTestingOutput" class="btn btn-default">
+                        <span class="glyphicon glyphicon-plus"/> 添加更多测试输入
+                    </button>
+                </div>
+            </div>
         </div>
 
-        <%--<div id="test">--%>
-        <%--<hr>--%>
-        <%--<div class="form-group">--%>
-        <%--<div class="col-sm-offset-2 col-sm-10">--%>
-        <%--<button type="button" id="add" class="btn btn-default">--%>
-        <%--<span class="glyphicon glyphicon-plus"/> 添加测试过程--%>
-        <%--</button>--%>
-        <%--</div>--%>
-        <%--</div>--%>
+        <hr>
+
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <button type="submit" class="btn btn-default">
