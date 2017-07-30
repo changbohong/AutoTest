@@ -89,7 +89,7 @@
         </c:if>
 
     </form>
-    <form class="form-horizontal" role="form" method="post" action="/test/addTesting">
+    <form class="form-horizontal" role="form" method="post" action="/testing/addTesting">
         <!-- 点击"#add",向"#target"添加内容-->
         <script>
         $(function () {
@@ -139,37 +139,56 @@
         });
         </script>
 
-        <div id="testings">
+        <div id="testing">
             <hr>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">测试过程编号</label>
+            <div class="form-group" style="display: none">
+                <label for="testname" class="col-sm-2 control-label">测试Id</label>
                 <div class="col-sm-10">
-                    <%--<input type="text" class="form-control"  value="1" name="testingList[0].id" readonly>--%>
-                    <input type="text" class="form-control"  value="1" readonly>
+                    <input type="text" class="form-control" id="testId" value="${test.id}" name="testId" readonly>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">测试过程名称</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="请输入测试过程名称" value="" name="testingList[0].testingName">
+                    <input type="text" class="form-control" placeholder="请输入测试过程名称" value="" name="testingName">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">测试过程URL</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="请输入测试过程URL" value="" name="testingList[0].url">
+                    <input type="text" class="form-control" placeholder="请输入测试过程URL" value="" name="url">
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">测试过程输入</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="请输入测试过程输入" value="" name="testingList[0].input">
+            <div id="testingInput">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">输入字段</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" placeholder="请输入字段，例如'username'" value=""
+                               name="testingInputList[0].inputKey">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">字段值</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" placeholder="请输入对应字段值，例如'changbohong'" value=""
+                               name="testingInputList[0].inputValue">
+                    </div>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">测试过程预期输出</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="请输入测试过程输出" value="" name="testingList[0].expectOutput">
+            <div id="expectedTestingOutput">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">预期输出字段</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" placeholder="请输入字段，例如'code'" value=""
+                               name="expectedTestingOutputList[0].outputKey">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">字段值</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" placeholder="请输入对应字段值，例如'0'" value=""
+                               name="expectedTestingOutputList[0].outputValue">
+                    </div>
                 </div>
             </div>
         </div>

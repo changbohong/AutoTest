@@ -4,19 +4,13 @@ package edu.bupt.cbh.testing.entity;
  * Created by changbohong on 2017/7/23.
  */
 
-public class TestingOutput {
-    private Integer outputId;
+public class ExpectedTestingOutput {
+    private Integer expectedOutputId;
     private Integer testingId;
     private String outputKey;
     private String outputValue;
 
-    public Integer getOutputId() {
-        return outputId;
-    }
 
-    public void setOutputId(Integer outputId) {
-        this.outputId = outputId;
-    }
 
     public Integer getTestingId() {
         return testingId;
@@ -24,6 +18,14 @@ public class TestingOutput {
 
     public void setTestingId(Integer testingId) {
         this.testingId = testingId;
+    }
+
+    public Integer getExpectedOutputId() {
+        return expectedOutputId;
+    }
+
+    public void setExpectedOutputId(Integer expectedOutputId) {
+        this.expectedOutputId = expectedOutputId;
     }
 
     public String getOutputKey() {

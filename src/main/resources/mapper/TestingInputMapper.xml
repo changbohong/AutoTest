@@ -9,18 +9,18 @@
     </resultMap>
 
     <sql id="input_column_list">
-        test_id,input_key,input_value
+        testing_id,input_key,input_value
     </sql>
 
-    <insert id="addInput" parameterType="TestingInput" useGeneratedKeys="true" keyProperty="input_id">
+    <insert id="insertTestingInput" parameterType="TestingInput" useGeneratedKeys="true" keyProperty="input_id">
         insert
-        into input_table(<include refid="input_column_list"/>)
-        values(#{testing_id},#{input_key},#{input_value)
+        into testing_input(<include refid="input_column_list"/>)
+        values(#{testingId},#{inputKey},#{inputValue})
     </insert>
 
     <select id="getInputList" resultMap="baseResultMap">
         select *
-        from input_table
+        from testing_input
         where testing_id = #{testingId,jdbcType=INTEGER};
     </select>
 

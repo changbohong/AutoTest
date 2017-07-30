@@ -13,8 +13,8 @@ import java.util.List;
 @Repository
 public class TestingInputDaoImpl extends BaseDaoImpl implements TestingInputDao {
     @Override
-    public Integer addInput (TestingInput testingInput) {
-        return sqlSessionTemplate.insert(this.getNameSpace()+".addInput" , testingInput);
+    public Integer insertTestingInput (TestingInput testingInput) {
+        return sqlSessionTemplate.insert(this.getNameSpace()+".insertTestingInput" , testingInput);
     }
 
     @Override

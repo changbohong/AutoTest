@@ -7,16 +7,9 @@ package edu.bupt.cbh.testing.entity;
 public class TestingInput {
     private Integer inputId;
     private Integer testingId;
-    private String key;
-    private String value;
+    private String inputKey;
+    private String inputValue;
 
-    public Integer getOutputId() {
-        return inputId;
-    }
-
-    public void setOutputId(Integer outputId) {
-        this.inputId = outputId;
-    }
 
     public Integer getTestingId() {
         return testingId;
@@ -26,19 +19,27 @@ public class TestingInput {
         this.testingId = testingId;
     }
 
-    public String getKey() {
-        return key;
+    public Integer getInputId() {
+        return inputId;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setInputId(Integer inputId) {
+        this.inputId = inputId;
     }
 
-    public String getValue() {
-        return value;
+    public String getInputKey() {
+        return inputKey;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setInputKey(String inputKey) {
+        this.inputKey = inputKey;
+    }
+
+    public String getInputValue() {
+        return inputValue;
+    }
+
+    public void setInputValue(String inputValue) {
+        this.inputValue = inputValue;
     }
 }

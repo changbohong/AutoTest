@@ -16,14 +16,14 @@
 
     <insert id="addTesting" parameterType="Testing" useGeneratedKeys="true" keyProperty="testing_id">
         insert
-        into test(<include refid="testing_column_list"/>)
+        into testing(<include refid="testing_column_list"/>)
             values(#{testId},#{url},#{testingName},#{excuted},#{excuteTime})
     </insert>
 
     <select id="getAllTestings" resultMap="baseResultMap">
         select *
         from testing
-        where testId = #{testId,jdbcType=INTEGER};
+        where test_id = #{testId,jdbcType=INTEGER};
     </select>
 
 </mapper>

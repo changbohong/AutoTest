@@ -1,6 +1,7 @@
 package edu.bupt.cbh.testing.service;
 
 import edu.bupt.cbh.testing.entity.Testing;
+import edu.bupt.cbh.testing.vo.AddTestingVO;
 
 import java.util.List;
 import java.util.Map;
@@ -12,10 +13,10 @@ public interface TestingService {
 
     /**
      * 创建测试单元
-     * @param testing
+     * @param addTestingVO
      * @return
      */
-    Integer addTesting(Testing testing);
+    Integer addTesting(AddTestingVO addTestingVO);
 
     /**
      * 获得此测试下的所有测试单元

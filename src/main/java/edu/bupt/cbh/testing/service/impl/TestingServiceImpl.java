@@ -1,12 +1,15 @@
 package edu.bupt.cbh.testing.service.impl;
 
+import edu.bupt.cbh.testing.dao.ExpectedTestingOutputDao;
 import edu.bupt.cbh.testing.dao.TestingInputDao;
 import edu.bupt.cbh.testing.dao.TestingOutputDao;
 import edu.bupt.cbh.testing.dao.TestingDao;
+import edu.bupt.cbh.testing.entity.ExpectedTestingOutput;
 import edu.bupt.cbh.testing.entity.Testing;
 import edu.bupt.cbh.testing.entity.TestingInput;
 import edu.bupt.cbh.testing.entity.TestingOutput;
 import edu.bupt.cbh.testing.service.TestingService;
+import edu.bupt.cbh.testing.vo.AddTestingVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,9 +30,43 @@ public class TestingServiceImpl implements TestingService{
     @Autowired
     private TestingOutputDao outputDao;
 
+    @Autowired
+    private ExpectedTestingOutputDao expectedTestingOutputDao;
+
     @Override
-    public Integer addTesting(Testing testing) {
-        return testingDao.addTesting(testing);
+    public Integer addTesting(AddTestingVO addTestingVO) {
+        //保存Testing,返回testingId
+        Testing testing = new Testing();
+        testing.setTestId(addTestingVO.getTestId());
+        testing.setTestingName(addTestingVO.getTestingName());
+        testing.setUrl(addTestingVO.getUrl());
+        Integer testingId = testingDao.addTesting(testing);
+        if (testingId == null){
+            System.out.println("插入Testing失败：【testId："+testing.getTestId()+",testingName："+testing.getTestingName()+"】");
+        }
+
+        //保存TestingInput
+        //保存前先设置testingId
+        List<TestingInput> testingInputList = addTestingVO.getTestingInputList();
+        for (TestingInput testingInput : testingInputList){
+            testingInput.setTestingId(testingId);
+            Integer inputId = inputDao.insertTestingInput(testingInput);
+            if (inputId == null){
+                System.out.println("插入TestingInput失败：【testingId:"+testingId+",key："+testingInput.getInputKey()+",value:"+testingInput.getInputValue()+"】");
+            }
+        }
+
+        //保存ExpectedTestingOutput
+        List<ExpectedTestingOutput> expectedTestingOutputList = addTestingVO.getExpectedTestingOutputList();
+        for (ExpectedTestingOutput expectedTestingOutput : expectedTestingOutputList){
+            expectedTestingOutput.setTestingId(testingId);
+            Integer expectedOutputId = expectedTestingOutputDao.insertExpectedOutput(expectedTestingOutput);
+            if (expectedOutputId == null){
+                System.out.println("插入ExpectedTestingOutput失败：【testingId:"+testingId+",key："+expectedTestingOutput.getOutputKey()+",value:"+expectedTestingOutput.getOutputValue()+"】");
+            }
+        }
+
+        return testingId;
     }
 
     @Override
@@ -42,10 +79,10 @@ public class TestingServiceImpl implements TestingService{
         List<TestingInput> inputList = inputDao.getInputList(testingId);
         Map<String  , Object> inputMap = new HashMap<>();
         for (TestingInput input : inputList){
-            if (inputMap.containsKey(input.getKey())){
+            if (inputMap.containsKey(input.getInputKey())){
                 System.out.println("getInputMap + key重复");
             } else {
-                inputMap.put(input.getKey() , input.getValue());
+                inputMap.put(input.getInputKey() , input.getInputValue());
             }
         }
         return inputMap;
@@ -55,8 +92,8 @@ public class TestingServiceImpl implements TestingService{
     public void insertOutPutMap(Map<String, Object> outputMap , Integer testingId) {
         for (Map.Entry<String , Object> entry : outputMap.entrySet()){
             TestingOutput output = new TestingOutput();
-            output.setKey(entry.getKey());
-            output.setValue((String) entry.getValue());
+            output.setOutputKey(entry.getKey());
+            output.setOutputValue((String) entry.getValue());
             output.setTestingId(testingId);
             Integer outputId = outputDao.insertOutput(output);
             if (outputId == null){

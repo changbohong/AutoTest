@@ -2,13 +2,19 @@ package edu.bupt.cbh.testing.controller;
 
 import edu.bupt.cbh.test.entity.Test;
 import edu.bupt.cbh.test.service.TestService;
+import edu.bupt.cbh.testing.entity.ExpectedTestingOutput;
 import edu.bupt.cbh.testing.entity.Testing;
+import edu.bupt.cbh.testing.entity.TestingInput;
 import edu.bupt.cbh.testing.service.TestingService;
+import edu.bupt.cbh.testing.vo.AddTestingVO;
 import edu.bupt.cbh.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 /**
  * Created by changbohong on 2017/7/23.
@@ -25,26 +31,33 @@ public class TestingController {
 
     @Autowired
     private TestingService testingService;
+
     /**
      * 展示添加测试单元页面
+     *
      * @param id
      * @return
      */
     @RequestMapping("/toAddTesting")
-    public ModelAndView toAddTesting(Integer id){
+    public ModelAndView toAddTesting(Integer id) {
         ModelAndView modelAndView = new ModelAndView("testing/addTesting");
         Test test = testService.getTestById(id);
-
         modelAndView.addObject("test", test);
         return modelAndView;
     }
 
-    public ModelAndView addTesting(Testing testing){
+    /**
+     * 添加测试单元
+     * @param addTestingVO
+     * @return
+     */
+    @RequestMapping("/addTesting")
+    public ModelAndView addTesting(AddTestingVO addTestingVO) {
         //保存Testing
         ModelAndView modelAndView = new ModelAndView("main/main");
-        Integer testingId = testingService.addTesting(testing);
+        Integer testingId = testingService.addTesting(addTestingVO);
         if (testingId == null) {
-            String msg = "创建测试失败，测试名称为：" + testing.getTestingName();
+            String msg = "创建测试失败，测试名称为：" + addTestingVO.getTestingName();
             modelAndView.addObject("msg", msg);
             System.out.println(msg);
             return modelAndView;
