@@ -19,6 +19,8 @@ public class TestResult {
     private Test test;
     //多个测试单元
     private List<Testing> testingList;
+
+
     //每个测试单元的输入
     private List<TestingInput> testingInputList;
     //每个测试单元的预期输出

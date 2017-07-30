@@ -1,6 +1,7 @@
 package edu.bupt.cbh.testing.dao;
 
 import edu.bupt.cbh.testing.entity.Testing;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 

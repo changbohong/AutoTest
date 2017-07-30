@@ -6,19 +6,17 @@
         <result property="testId" column="test_id" jdbcType="INTEGER"/>
         <result property="url" column="url" jdbcType="VARCHAR"/>
         <result property="testingName" column="testing_name" jdbcType="VARCHAR"/>
-        <result property="excuteTime" column="excute_time" jdbcType="DATE"/>
-        <result property="excuted" column="excuted" jdbcType="TINYINT"/>
         <result property="result" column="result" jdbcType="TINYINT"/>
     </resultMap>
 
     <sql id="testing_column_list">
-        test_id,url,testing_name,excuted,excute_time,result
+        test_id,url,testing_name,result
     </sql>
 
     <insert id="addTesting" parameterType="Testing" useGeneratedKeys="true" keyProperty="testing_id">
         insert
         into testing(<include refid="testing_column_list"/>)
-            values(#{testId},#{url},#{testingName},#{excuted},#{excuteTime},#{result})
+            values(#{testId},#{url},#{testingName},#{result})
     </insert>
 
     <update id="updateTesting" parameterType="Testing">

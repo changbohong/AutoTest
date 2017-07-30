@@ -13,7 +13,6 @@ public class Testing {
     private Integer testId;
     private String url;
     private String testingName;
-    private Date excuteTime;
     private Boolean result;
 
     private Map<String, Object> TestingInput;
@@ -50,15 +49,6 @@ public class Testing {
 
     public void setExpectedTestingOutput(Map<String, Object> expectedTestingOutput) {
         ExpectedTestingOutput = expectedTestingOutput;
-    }
-
-
-    public Date getExcuteTime() {
-        return excuteTime;
-    }
-
-    public void setExcuteTime(Date excuteTime) {
-        this.excuteTime = excuteTime;
     }
 
     public Integer getTestId() {

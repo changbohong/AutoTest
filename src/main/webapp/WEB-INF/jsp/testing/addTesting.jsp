@@ -148,15 +148,15 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">测试过程名称</label>
+                <label class="col-sm-2 control-label">测试单元名称</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="请输入测试过程名称" value="" name="testingName">
+                    <input type="text" class="form-control" placeholder="请输入测试单元名称" value="" name="testingName">
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">测试过程URL</label>
+                <label class="col-sm-2 control-label">测试单元URL</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="请输入测试过程URL" value="" name="url">
+                    <input type="text" class="form-control" placeholder="请输入测试单元URL" value="" name="url">
                 </div>
             </div>
 
