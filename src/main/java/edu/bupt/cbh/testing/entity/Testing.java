@@ -16,6 +16,34 @@ public class Testing {
     private Boolean excuted;
     private Date excuteTime;
 
+    private Map<String,Object> TestingInput;
+    private Map<String,Object> TestingOutput;
+    private Map<String,Object> ExpectedTestingOutput;
+
+    public Map<String, Object> getTestingInput() {
+        return TestingInput;
+    }
+
+    public void setTestingInput(Map<String, Object> testingInput) {
+        TestingInput = testingInput;
+    }
+
+    public Map<String, Object> getTestingOutput() {
+        return TestingOutput;
+    }
+
+    public void setTestingOutput(Map<String, Object> testingOutput) {
+        TestingOutput = testingOutput;
+    }
+
+    public Map<String, Object> getExpectedTestingOutput() {
+        return ExpectedTestingOutput;
+    }
+
+    public void setExpectedTestingOutput(Map<String, Object> expectedTestingOutput) {
+        ExpectedTestingOutput = expectedTestingOutput;
+    }
+
     public Boolean getExcuted() {
         return excuted;
     }

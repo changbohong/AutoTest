@@ -7,6 +7,8 @@ import edu.bupt.cbh.testing.entity.ExpectedTestingOutput;
 import edu.bupt.cbh.testing.entity.TestingOutput;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by changbohong on 2017/7/23.
  */
@@ -16,5 +18,10 @@ public class ExpectedTestingOutputDaoImpl extends BaseDaoImpl implements Expecte
     @Override
     public Integer insertExpectedOutput(ExpectedTestingOutput expectedTestingOutput) {
         return sqlSessionTemplate.insert(this.getNameSpace()+".insertexpectedTestingOutput" , expectedTestingOutput);
+    }
+
+    @Override
+    public List<ExpectedTestingOutput> getExpectedTestingOutputList(Integer testingId) {
+        return sqlSessionTemplate.selectList(this.getNameSpace()+".getExpectedTestingOutputList" , testingId);
     }
 }

@@ -2,6 +2,7 @@ package edu.bupt.cbh.test.controller;
 
 import edu.bupt.cbh.common.Constants;
 import edu.bupt.cbh.test.entity.Test;
+import edu.bupt.cbh.test.entity.TestResult;
 import edu.bupt.cbh.test.service.TestService;
 import edu.bupt.cbh.test.vo.CreateTestVO;
 import edu.bupt.cbh.testing.entity.Testing;
@@ -98,6 +99,25 @@ public class TestController {
         return modelAndView;
     }
 
+    /**
+     * 生成测试报告
+     *
+     * @param testId
+     * @return
+     */
+    @RequestMapping("/testReport")
+    public ModelAndView testReport(Integer testId) {
+        ModelAndView modelAndView = new ModelAndView("test/testReport");
+        TestResult testResult = testService.createTestReport(testId);
+        modelAndView.addObject("testResult", testResult);
+        return modelAndView;
+    }
+
+    /**
+     * 执行测试
+     * @param testId
+     * @return
+     */
     @RequestMapping("/testRun")
     public ModelAndView testRun(Integer testId) {
         ModelAndView modelAndView = new ModelAndView("main/main");
@@ -106,26 +126,16 @@ public class TestController {
         String baseUrl = test.getUrl();
         List<Testing> testingList = testingService.getAllTestings(testId);
         //依次执行
-        for (Testing testing : testingList){
+        for (Testing testing : testingList) {
             String targetUrl = testing.getUrl();
             //获得测试单元的输入
-            Map<String , Object> params = testingService.getInputMap(testing.getTestingId());
+            Map<String, Object> params = testingService.getInputMap(testing.getTestingId());
             //执行测试单元
-            Map<String , Object> result = testService.testRun(baseUrl , targetUrl , params);
+            Map<String, Object> result = testService.testRun(baseUrl, targetUrl, params);
             //执行结果写回
-            testingService.insertOutPutMap(result , testing.getTestingId());
+            testingService.insertOutPutMap(result, testing.getTestingId());
         }
 
-//        RestTemplate restTemplate = new RestTemplate();
-//        String url = "http://192.168.1.104:8080/hiservice/test/login";
-//        Map<String, String> params = new HashMap<>();
-//        params.put("username", "admin");
-//        params.put("password", "123456");
-//        Map<String, Object> response =  restTemplate.postForObject(url,params, Map.class);
-
-//        int code = Integer.parseInt(String.valueOf(response.getOrDefault("code", 1)));
-
-//        modelAndView.addObject("msg", code);
         return modelAndView;
     }
 

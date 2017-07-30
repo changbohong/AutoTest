@@ -23,5 +23,11 @@ public class Constants {
         public static final Boolean NOT_EXCUTED = false;
     }
 
+    public static class TestingResults{
+        public static final String TRUE = "正确";
+        public static final String FALSE = "错误";
+        public static final String KEY_NOT_FOUND = "未收到该字段";
+    }
+
     public static final Integer PAGE_SIZE = 10;
 }

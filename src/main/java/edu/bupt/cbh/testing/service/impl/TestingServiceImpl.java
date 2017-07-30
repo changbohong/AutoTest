@@ -25,10 +25,10 @@ public class TestingServiceImpl implements TestingService{
     private TestingDao testingDao;
 
     @Autowired
-    private TestingInputDao inputDao;
+    private TestingInputDao testingInputDao;
 
     @Autowired
-    private TestingOutputDao outputDao;
+    private TestingOutputDao testingOutputDao;
 
     @Autowired
     private ExpectedTestingOutputDao expectedTestingOutputDao;
@@ -50,7 +50,7 @@ public class TestingServiceImpl implements TestingService{
         List<TestingInput> testingInputList = addTestingVO.getTestingInputList();
         for (TestingInput testingInput : testingInputList){
             testingInput.setTestingId(testingId);
-            Integer inputId = inputDao.insertTestingInput(testingInput);
+            Integer inputId = testingInputDao.insertTestingInput(testingInput);
             if (inputId == null){
                 System.out.println("插入TestingInput失败：【testingId:"+testingId+",key："+testingInput.getInputKey()+",value:"+testingInput.getInputValue()+"】");
             }
@@ -76,7 +76,7 @@ public class TestingServiceImpl implements TestingService{
 
     @Override
     public Map<String, Object> getInputMap(Integer testingId) {
-        List<TestingInput> inputList = inputDao.getInputList(testingId);
+        List<TestingInput> inputList = testingInputDao.getInputList(testingId);
         Map<String  , Object> inputMap = new HashMap<>();
         for (TestingInput input : inputList){
             if (inputMap.containsKey(input.getInputKey())){
@@ -89,16 +89,48 @@ public class TestingServiceImpl implements TestingService{
     }
 
     @Override
+    public Map<String, Object> getOutputMap(Integer testingId) {
+        List<TestingOutput> outputList = testingOutputDao.getTestingOutputList(testingId);
+        Map<String  , Object> outputMap = new HashMap<>();
+        for (TestingOutput testingOutput : outputList){
+            if (outputMap.containsKey(testingOutput.getOutputKey())){
+                System.out.println("getOutputMap key重复");
+            } else {
+                outputMap.put(testingOutput.getOutputKey() , testingOutput.getOutputValue());
+            }
+        }
+        return outputMap;
+    }
+
+    @Override
+    public Map<String, Object> getExpectedOutputMap(Integer testingId) {
+        List<ExpectedTestingOutput> expectedTestingOutputList = expectedTestingOutputDao.getExpectedTestingOutputList(testingId);
+        Map<String  , Object> expectedOutputMap = new HashMap<>();
+        for (ExpectedTestingOutput expectedTestingOutput : expectedTestingOutputList){
+            if (expectedOutputMap.containsKey(expectedTestingOutput.getOutputKey())){
+                System.out.println("getExpectedOutputMap key重复");
+            } else {
+                expectedOutputMap.put(expectedTestingOutput.getOutputKey() , expectedTestingOutput.getOutputValue());
+            }
+        }
+        return expectedOutputMap;
+    }
+
+    @Override
     public void insertOutPutMap(Map<String, Object> outputMap , Integer testingId) {
         for (Map.Entry<String , Object> entry : outputMap.entrySet()){
             TestingOutput output = new TestingOutput();
             output.setOutputKey(entry.getKey());
             output.setOutputValue((String) entry.getValue());
             output.setTestingId(testingId);
-            Integer outputId = outputDao.insertOutput(output);
+            Integer outputId = testingOutputDao.insertOutput(output);
             if (outputId == null){
                 System.out.println("output回写失败 + output ：[" + entry.getKey()+ " : " + entry.getValue()+"]");
             }
         }
     }
+
+
+
+
 }

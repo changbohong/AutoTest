@@ -18,4 +18,10 @@
             values(#{testingId},#{outputKey},#{outputValue})
     </insert>
 
+    <select id="getTestingOutputList" resultMap="baseResultMap">
+        select *
+        from testing_output
+        where testing_id = #{testingId,jdbcType=INTEGER};
+    </select>
+
 </mapper>

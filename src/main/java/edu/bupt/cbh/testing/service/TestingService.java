@@ -1,6 +1,9 @@
 package edu.bupt.cbh.testing.service;
 
+import edu.bupt.cbh.testing.entity.ExpectedTestingOutput;
 import edu.bupt.cbh.testing.entity.Testing;
+import edu.bupt.cbh.testing.entity.TestingInput;
+import edu.bupt.cbh.testing.entity.TestingOutput;
 import edu.bupt.cbh.testing.vo.AddTestingVO;
 
 import java.util.List;
@@ -33,6 +36,10 @@ public interface TestingService {
      * @return
      */
     Map<String , Object> getInputMap(Integer testingId);
+
+    Map<String , Object> getOutputMap(Integer testingId);
+
+    Map<String , Object> getExpectedOutputMap(Integer testingId);
 
     /**
      * 测试结果写回

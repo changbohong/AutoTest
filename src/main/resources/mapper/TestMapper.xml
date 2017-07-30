@@ -13,7 +13,7 @@
     </resultMap>
 
     <sql id="test_column_list">
-        user_id,name,excuted,create_time,is_excute_now,excute_time
+        user_id,name,excuted,create_time,is_excute_now,excute_time,url
     </sql>
 
     <insert id="insertTest" parameterType="Test" useGeneratedKeys="true" keyProperty="id">

@@ -1,6 +1,7 @@
 package edu.bupt.cbh.test.service;
 
 import edu.bupt.cbh.test.entity.Test;
+import edu.bupt.cbh.test.entity.TestResult;
 import edu.bupt.cbh.test.vo.CreateTestVO;
 
 import java.util.List;
@@ -34,5 +35,12 @@ public interface TestService {
      * @return
      */
     Map<String, Object> testRun(String baseUrl , String targetUrl , Map<String, Object> params);
+
+    /**
+     * 生成测试报告
+     * @param testId
+     * @return
+     */
+    TestResult createTestReport(Integer testId);
 
 }
