@@ -13,6 +13,7 @@ import java.util.Map;
 @RequestMapping("/ceshi")
 public class CeshiController {
 
+    @RequestMapping("/login")
     public Map<String, Object> login(String username, String password) {
         Map<String, Object> map = new HashMap<>();
         if (username == "cbh" && password == "cbh") {

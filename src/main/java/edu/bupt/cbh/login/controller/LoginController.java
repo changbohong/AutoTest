@@ -1,7 +1,5 @@
 package edu.bupt.cbh.login.controller;
 
-import edu.bupt.cbh.template.service.InitTemplatDataBaseeService;
-import edu.bupt.cbh.user.dao.UserDao;
 import edu.bupt.cbh.user.entity.User;
 import edu.bupt.cbh.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +17,6 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private InitTemplatDataBaseeService initTemplatDataBaseeService;
 
     /**
      * 未登录，返回登录页面
@@ -45,11 +40,6 @@ public class LoginController {
     @RequestMapping(value = {"/", "/main"})
     public ModelAndView main(){
         return new ModelAndView("main/main");
-    }
-
-    @RequestMapping("/init")
-    public void initTemplate(){
-        initTemplatDataBaseeService.initTemplateDataBase();
     }
 
     @RequestMapping("/logout")

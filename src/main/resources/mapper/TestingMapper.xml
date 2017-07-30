@@ -13,7 +13,7 @@
         test_id,url,testing_name,result
     </sql>
 
-    <insert id="addTesting" parameterType="Testing" useGeneratedKeys="true" keyProperty="testing_id">
+    <insert id="addTesting" parameterType="Testing" useGeneratedKeys="true" keyProperty="testingId">
         insert
         into testing(<include refid="testing_column_list"/>)
             values(#{testId},#{url},#{testingName},#{result})

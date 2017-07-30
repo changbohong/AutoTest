@@ -56,7 +56,7 @@
     <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage"
-                  value="edu.bupt.cbh.user.dao,edu.bupt.cbh.testing.dao,edu.bupt.cbh.test.dao,edu.bupt.cbh.template.dao"/>
+                  value="edu.bupt.cbh.user.dao,edu.bupt.cbh.testing.dao,edu.bupt.cbh.test.dao"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 

@@ -12,7 +12,7 @@
         testing_id,input_key,input_value
     </sql>
 
-    <insert id="insertTestingInput" parameterType="TestingInput" useGeneratedKeys="true" keyProperty="input_id">
+    <insert id="insertTestingInput" parameterType="TestingInput" useGeneratedKeys="true" keyProperty="inputId">
         insert
         into testing_input(<include refid="input_column_list"/>)
         values(#{testingId},#{inputKey},#{inputValue})

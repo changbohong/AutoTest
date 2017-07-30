@@ -42,7 +42,8 @@ public class TestingServiceImpl implements TestingService{
         testing.setTestId(addTestingVO.getTestId());
         testing.setTestingName(addTestingVO.getTestingName());
         testing.setUrl(addTestingVO.getUrl());
-        Integer testingId = testingDao.addTesting(testing);
+        testingDao.addTesting(testing);
+        Integer testingId = testing.getTestingId();
         if (testingId == null){
             System.out.println("插入Testing失败：【testId："+testing.getTestId()+",testingName："+testing.getTestingName()+"】");
         }
@@ -52,7 +53,8 @@ public class TestingServiceImpl implements TestingService{
         List<TestingInput> testingInputList = addTestingVO.getTestingInputList();
         for (TestingInput testingInput : testingInputList){
             testingInput.setTestingId(testingId);
-            Integer inputId = testingInputDao.insertTestingInput(testingInput);
+            testingInputDao.insertTestingInput(testingInput);
+            Integer inputId = testingInput.getInputId();
             if (inputId == null){
                 System.out.println("插入TestingInput失败：【testingId:"+testingId+",key："+testingInput.getInputKey()+",value:"+testingInput.getInputValue()+"】");
             }
@@ -62,7 +64,8 @@ public class TestingServiceImpl implements TestingService{
         List<ExpectedTestingOutput> expectedTestingOutputList = addTestingVO.getExpectedTestingOutputList();
         for (ExpectedTestingOutput expectedTestingOutput : expectedTestingOutputList){
             expectedTestingOutput.setTestingId(testingId);
-            Integer expectedOutputId = expectedTestingOutputDao.insertExpectedOutput(expectedTestingOutput);
+            expectedTestingOutputDao.insertExpectedOutput(expectedTestingOutput);
+            Integer expectedOutputId = expectedTestingOutput.getExpectedOutputId();
             if (expectedOutputId == null){
                 System.out.println("插入ExpectedTestingOutput失败：【testingId:"+testingId+",key："+expectedTestingOutput.getOutputKey()+",value:"+expectedTestingOutput.getOutputValue()+"】");
             }
@@ -130,7 +133,8 @@ public class TestingServiceImpl implements TestingService{
             output.setOutputKey(entry.getKey());
             output.setOutputValue((String) entry.getValue());
             output.setTestingId(testingId);
-            Integer outputId = testingOutputDao.insertOutput(output);
+            testingOutputDao.insertOutput(output);
+            Integer outputId = output.getOutputId();
             if (outputId == null){
                 System.out.println("output回写失败 + output ：[" + entry.getKey()+ " : " + entry.getValue()+"]");
             }
@@ -159,6 +163,7 @@ public class TestingServiceImpl implements TestingService{
     private Map<String, Object> testingRun(String baseUrl, String targetUrl, Map<String, Object> params) {
         RestTemplate restTemplate = new RestTemplate();
         String url = baseUrl + targetUrl;
+        System.out.println("开始测试url："+url);
         return restTemplate.postForObject(url, params, Map.class);
     }
 
