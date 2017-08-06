@@ -1,7 +1,5 @@
 package edu.bupt.cbh.testing.entity;
 
-import java.net.URL;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -15,9 +13,19 @@ public class Testing {
     private String testingName;
     private Boolean result;
 
-    private Map<String, Object> TestingInput;
-    private Map<String, Object> TestingOutput;
-    private Map<String, Object> ExpectedTestingOutput;
+    private Map<String, Object> testingInput;
+    private Map<String, Object> testingOutput;
+    private Map<String, Object> expectedTestingOutput;
+
+    private List<TestingOutputResult> testingOutputResultList;
+
+    public List<TestingOutputResult> getTestingOutputResultList() {
+        return testingOutputResultList;
+    }
+
+    public void setTestingOutputResultList(List<TestingOutputResult> testingOutputResultList) {
+        this.testingOutputResultList = testingOutputResultList;
+    }
 
     public Boolean getResult() {
         return result;
@@ -28,27 +36,27 @@ public class Testing {
     }
 
     public Map<String, Object> getTestingInput() {
-        return TestingInput;
+        return testingInput;
     }
 
     public void setTestingInput(Map<String, Object> testingInput) {
-        TestingInput = testingInput;
+        this.testingInput = testingInput;
     }
 
     public Map<String, Object> getTestingOutput() {
-        return TestingOutput;
+        return testingOutput;
     }
 
     public void setTestingOutput(Map<String, Object> testingOutput) {
-        TestingOutput = testingOutput;
+        this.testingOutput = testingOutput;
     }
 
     public Map<String, Object> getExpectedTestingOutput() {
-        return ExpectedTestingOutput;
+        return expectedTestingOutput;
     }
 
     public void setExpectedTestingOutput(Map<String, Object> expectedTestingOutput) {
-        ExpectedTestingOutput = expectedTestingOutput;
+        this.expectedTestingOutput = expectedTestingOutput;
     }
 
     public Integer getTestId() {

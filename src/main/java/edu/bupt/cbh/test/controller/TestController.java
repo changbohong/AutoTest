@@ -96,32 +96,36 @@ public class TestController {
         ModelAndView modelAndView = new ModelAndView("test/testDetails");
         Test test = testService.getTestById(id);
         modelAndView.addObject("test", test);
+        List<Testing> testingList = testingService.getAllTestings(id);
+        modelAndView.addObject("testingList", testingList);
+        return modelAndView;
+    }
+
+    /**
+     * 测试报告
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/testReport")
+    public ModelAndView testReport(Integer id) {
+        ModelAndView modelAndView = new ModelAndView("test/testReport");
+        Test test = testService.getTestById(id);
+        modelAndView.addObject("test", test);
+        List<Testing> testingList = testingService.getAllTestings(id);
+        modelAndView.addObject("testingList", testingList);
         return modelAndView;
     }
 
     /**
      * 执行测试
-     * @param testId
+     *
+     * @param id
      * @return
      */
     @RequestMapping("/testRun")
-    public ModelAndView testRun(Integer testId) {
+    public ModelAndView testRun(Integer id) {
         ModelAndView modelAndView = new ModelAndView("main/main");
-        testService.testRun(testId);
-        return modelAndView;
-    }
-
-    /**
-     * 生成测试报告
-     *
-     * @param testId
-     * @return
-     */
-    @RequestMapping("/testReport")
-    public ModelAndView testReport(Integer testId) {
-        ModelAndView modelAndView = new ModelAndView("test/testReport");
-        TestResult testResult = testService.createTestReport(testId);
-        modelAndView.addObject("testResult", testResult);
+        testService.testRun(id);
         return modelAndView;
     }
 

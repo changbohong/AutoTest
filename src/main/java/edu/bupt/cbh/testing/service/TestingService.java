@@ -1,9 +1,6 @@
 package edu.bupt.cbh.testing.service;
 
-import edu.bupt.cbh.testing.entity.ExpectedTestingOutput;
-import edu.bupt.cbh.testing.entity.Testing;
-import edu.bupt.cbh.testing.entity.TestingInput;
-import edu.bupt.cbh.testing.entity.TestingOutput;
+import edu.bupt.cbh.testing.entity.*;
 import edu.bupt.cbh.testing.vo.AddTestingVO;
 
 import java.util.List;
@@ -59,4 +56,6 @@ public interface TestingService {
      * @param baseUrl
      */
     void testingRun(Integer testId , String baseUrl);
+
+    List<TestingOutputResult> getTestingResultListByTesting(Testing testing);
 }

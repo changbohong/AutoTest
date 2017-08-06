@@ -1,14 +1,10 @@
 package edu.bupt.cbh.testing.service.impl;
 
-import edu.bupt.cbh.test.entity.Test;
 import edu.bupt.cbh.testing.dao.ExpectedTestingOutputDao;
 import edu.bupt.cbh.testing.dao.TestingInputDao;
 import edu.bupt.cbh.testing.dao.TestingOutputDao;
 import edu.bupt.cbh.testing.dao.TestingDao;
-import edu.bupt.cbh.testing.entity.ExpectedTestingOutput;
-import edu.bupt.cbh.testing.entity.Testing;
-import edu.bupt.cbh.testing.entity.TestingInput;
-import edu.bupt.cbh.testing.entity.TestingOutput;
+import edu.bupt.cbh.testing.entity.*;
 import edu.bupt.cbh.testing.service.TestingService;
 import edu.bupt.cbh.testing.vo.AddTestingVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +17,7 @@ import java.util.*;
  * Created by scarlett on 2017/5/25.
  */
 @Service
-public class TestingServiceImpl implements TestingService{
+public class TestingServiceImpl implements TestingService {
 
     @Autowired
     private TestingDao testingDao;
@@ -44,30 +40,30 @@ public class TestingServiceImpl implements TestingService{
         testing.setUrl(addTestingVO.getUrl());
         testingDao.addTesting(testing);
         Integer testingId = testing.getTestingId();
-        if (testingId == null){
-            System.out.println("插入Testing失败：【testId："+testing.getTestId()+",testingName："+testing.getTestingName()+"】");
+        if (testingId == null) {
+            System.out.println("插入Testing失败：【testId：" + testing.getTestId() + ",testingName：" + testing.getTestingName() + "】");
         }
 
         //保存TestingInput
         //保存前先设置testingId
         List<TestingInput> testingInputList = addTestingVO.getTestingInputList();
-        for (TestingInput testingInput : testingInputList){
+        for (TestingInput testingInput : testingInputList) {
             testingInput.setTestingId(testingId);
             testingInputDao.insertTestingInput(testingInput);
             Integer inputId = testingInput.getInputId();
-            if (inputId == null){
-                System.out.println("插入TestingInput失败：【testingId:"+testingId+",key："+testingInput.getInputKey()+",value:"+testingInput.getInputValue()+"】");
+            if (inputId == null) {
+                System.out.println("插入TestingInput失败：【testingId:" + testingId + ",key：" + testingInput.getInputKey() + ",value:" + testingInput.getInputValue() + "】");
             }
         }
 
         //保存ExpectedTestingOutput
         List<ExpectedTestingOutput> expectedTestingOutputList = addTestingVO.getExpectedTestingOutputList();
-        for (ExpectedTestingOutput expectedTestingOutput : expectedTestingOutputList){
+        for (ExpectedTestingOutput expectedTestingOutput : expectedTestingOutputList) {
             expectedTestingOutput.setTestingId(testingId);
             expectedTestingOutputDao.insertExpectedOutput(expectedTestingOutput);
             Integer expectedOutputId = expectedTestingOutput.getExpectedOutputId();
-            if (expectedOutputId == null){
-                System.out.println("插入ExpectedTestingOutput失败：【testingId:"+testingId+",key："+expectedTestingOutput.getOutputKey()+",value:"+expectedTestingOutput.getOutputValue()+"】");
+            if (expectedOutputId == null) {
+                System.out.println("插入ExpectedTestingOutput失败：【testingId:" + testingId + ",key：" + expectedTestingOutput.getOutputKey() + ",value:" + expectedTestingOutput.getOutputValue() + "】");
             }
         }
 
@@ -81,18 +77,51 @@ public class TestingServiceImpl implements TestingService{
 
     @Override
     public List<Testing> getAllTestings(Integer testId) {
-        return testingDao.getAllTestings(testId);
+        //获取testingList
+        List<Testing> testingList = testingDao.getAllTestings(testId);
+        //填充输入/输出/预期输出/结果
+        for (Testing testing : testingList) {
+            Integer testingId = testing.getTestingId();
+            testing.setTestingInput(this.getInputMap(testingId));
+            testing.setTestingOutput(this.getOutputMap(testingId));
+            testing.setExpectedTestingOutput(this.getExpectedOutputMap(testingId));
+            testing.setTestingOutputResultList(this.getTestingResultListByTesting(testing));
+        }
+        return testingList;
+    }
+
+    @Override
+    public List<TestingOutputResult> getTestingResultListByTesting(Testing testing) {
+        List<TestingOutputResult> testingOutputResultList = new ArrayList<>();
+        Map<String, Object> testingOutputMap = testing.getTestingOutput();
+        Map<String, Object> expectedTestingOutputMap = testing.getExpectedTestingOutput();
+
+        for (Map.Entry<String, Object> entry : expectedTestingOutputMap.entrySet()) {
+            TestingOutputResult testingOutputResult = new TestingOutputResult();
+            testingOutputResult.setKey(entry.getKey());
+            String output = (String) testingOutputMap.get(entry.getKey());
+            testingOutputResult.setOutput(output);
+            String expectedOutput = (String) expectedTestingOutputMap.get(entry.getKey());
+            testingOutputResult.setExpectedOutput(expectedOutput);
+            if (output != null && expectedOutput != null) {
+                testingOutputResult.setResult(output.equals(expectedOutput));
+            } else {
+                testingOutputResult.setResult(false);
+            }
+            testingOutputResultList.add(testingOutputResult);
+        }
+        return testingOutputResultList;
     }
 
     @Override
     public Map<String, Object> getInputMap(Integer testingId) {
         List<TestingInput> inputList = testingInputDao.getInputList(testingId);
-        Map<String  , Object> inputMap = new HashMap<>();
-        for (TestingInput input : inputList){
-            if (inputMap.containsKey(input.getInputKey())){
+        Map<String, Object> inputMap = new HashMap<>();
+        for (TestingInput input : inputList) {
+            if (inputMap.containsKey(input.getInputKey())) {
                 System.out.println("getInputMap + key重复");
             } else {
-                inputMap.put(input.getInputKey() , input.getInputValue());
+                inputMap.put(input.getInputKey(), input.getInputValue());
             }
         }
         return inputMap;
@@ -101,12 +130,12 @@ public class TestingServiceImpl implements TestingService{
     @Override
     public Map<String, Object> getOutputMap(Integer testingId) {
         List<TestingOutput> outputList = testingOutputDao.getTestingOutputList(testingId);
-        Map<String  , Object> outputMap = new HashMap<>();
-        for (TestingOutput testingOutput : outputList){
-            if (outputMap.containsKey(testingOutput.getOutputKey())){
+        Map<String, Object> outputMap = new HashMap<>();
+        for (TestingOutput testingOutput : outputList) {
+            if (outputMap.containsKey(testingOutput.getOutputKey())) {
                 System.out.println("getOutputMap key重复");
             } else {
-                outputMap.put(testingOutput.getOutputKey() , testingOutput.getOutputValue());
+                outputMap.put(testingOutput.getOutputKey(), testingOutput.getOutputValue());
             }
         }
         return outputMap;
@@ -115,28 +144,28 @@ public class TestingServiceImpl implements TestingService{
     @Override
     public Map<String, Object> getExpectedOutputMap(Integer testingId) {
         List<ExpectedTestingOutput> expectedTestingOutputList = expectedTestingOutputDao.getExpectedTestingOutputList(testingId);
-        Map<String  , Object> expectedOutputMap = new HashMap<>();
-        for (ExpectedTestingOutput expectedTestingOutput : expectedTestingOutputList){
-            if (expectedOutputMap.containsKey(expectedTestingOutput.getOutputKey())){
+        Map<String, Object> expectedOutputMap = new HashMap<>();
+        for (ExpectedTestingOutput expectedTestingOutput : expectedTestingOutputList) {
+            if (expectedOutputMap.containsKey(expectedTestingOutput.getOutputKey())) {
                 System.out.println("getExpectedOutputMap key重复");
             } else {
-                expectedOutputMap.put(expectedTestingOutput.getOutputKey() , expectedTestingOutput.getOutputValue());
+                expectedOutputMap.put(expectedTestingOutput.getOutputKey(), expectedTestingOutput.getOutputValue());
             }
         }
         return expectedOutputMap;
     }
 
     @Override
-    public void insertOutPutMap(Map<String, Object> outputMap , Integer testingId) {
-        for (Map.Entry<String , Object> entry : outputMap.entrySet()){
+    public void insertOutPutMap(Map<String, Object> outputMap, Integer testingId) {
+        for (Map.Entry<String, Object> entry : outputMap.entrySet()) {
             TestingOutput output = new TestingOutput();
             output.setOutputKey(entry.getKey());
             output.setOutputValue((String) entry.getValue());
             output.setTestingId(testingId);
             testingOutputDao.insertOutput(output);
             Integer outputId = output.getOutputId();
-            if (outputId == null){
-                System.out.println("output回写失败 + output ：[" + entry.getKey()+ " : " + entry.getValue()+"]");
+            if (outputId == null) {
+                System.out.println("output回写失败 + output ：[" + entry.getKey() + " : " + entry.getValue() + "]");
             }
         }
     }
@@ -155,7 +184,7 @@ public class TestingServiceImpl implements TestingService{
             this.insertOutPutMap(outputMap, testing.getTestingId());
             //执行结果与预期结果对比，更新测试单元结果
             Map<String, Object> expectedoutputMap = this.getExpectedOutputMap(testing.getTestingId());
-            testing.setResult(updateExpectedOutputWithOutput(expectedoutputMap,outputMap));
+            testing.setResult(updateExpectedOutputWithOutput(expectedoutputMap, outputMap));
             this.updateTesting(testing);
         }
     }
@@ -163,11 +192,13 @@ public class TestingServiceImpl implements TestingService{
     private Map<String, Object> testingRun(String baseUrl, String targetUrl, Map<String, Object> params) {
         RestTemplate restTemplate = new RestTemplate();
         String url = baseUrl + targetUrl;
-        System.out.println("开始测试url："+url);
+        System.out.println("开始测试url：" + url);
         return restTemplate.postForObject(url, params, Map.class);
     }
 
-    private Boolean updateExpectedOutputWithOutput(Map<String, Object> expectedoutputMap,Map<String, Object> outputMap){
+    private Boolean updateExpectedOutputWithOutput(Map<String, Object> expectedoutputMap, Map<String, Object> outputMap) {
         return expectedoutputMap.equals(outputMap);
     }
+
+
 }

@@ -4,7 +4,8 @@
 <html>
 <head>
     <meta name="viewport" http-equiv="Content-Type" content="text/html" charset="UTF-8">
-    <title>测试详情</title>
+    <title>测试报告</title>
+
     <!-- 引入 Bootstrap -->
     <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
@@ -125,6 +126,8 @@
                     <tr>
                         <th class="text-center">返回字段</th>
                         <th class="text-center">测试预期输出</th>
+                        <th class="text-center">测试实际输出</th>
+                        <th class="text-center">测试结果</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -132,6 +135,8 @@
                         <tr>
                             <td>${testingOutputResult.key}</td>
                             <td>${testingOutputResult.expectedOutput}</td>
+                            <td>${testingOutputResult.output}</td>
+                            <td>${testingOutputResult.result}</td>
                         </tr>
                     </c:forEach>
                     </tbody>
