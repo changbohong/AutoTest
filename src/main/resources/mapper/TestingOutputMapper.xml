@@ -18,6 +18,13 @@
             values(#{testingId},#{outputKey},#{outputValue})
     </insert>
 
+    <update id="updateOutputResult" parameterType="TestingOutput">
+        update testing_output
+        set output_value = #{outputValue}
+        where testing_id = #{testingId,jdbcType=INTEGER}
+        and output_key = #{outputKey,jdbcType=VARCHAR};
+    </update>
+
     <select id="getTestingOutputList" resultMap="baseResultMap">
         select *
         from testing_output

@@ -19,5 +19,13 @@ public interface TestingOutputDao {
      */
     Integer insertOutput(TestingOutput testingOutput);
 
+    /**
+     * 重新执行测试
+     * 更新结果
+     * @param testingOutput
+     * @return
+     */
+    Integer updateOutputResult(TestingOutput testingOutput);
+
     List<TestingOutput> getTestingOutputList(Integer testingId);
 }

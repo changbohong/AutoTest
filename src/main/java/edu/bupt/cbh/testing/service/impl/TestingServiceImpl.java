@@ -170,6 +170,20 @@ public class TestingServiceImpl implements TestingService {
         }
     }
 
+    public void updateOutputResult(Map<String, Object> outputMap, Testing testing) {
+        for (Map.Entry<String, Object> entry : outputMap.entrySet()) {
+            TestingOutput output = new TestingOutput();
+            output.setOutputKey(entry.getKey());
+            output.setOutputValue((String) entry.getValue());
+            output.setTestingId(testing.getTestingId());
+            testingOutputDao.updateOutputResult(output);
+            Integer outputId = output.getOutputId();
+            if (outputId == null) {
+                System.out.println("output回写失败 + output ：[" + entry.getKey() + " : " + entry.getValue() + "]");
+            }
+        }
+    }
+
     @Override
     public void testingRun(Integer testId, String baseUrl) {
         List<Testing> testingList = this.getAllTestings(testId);
@@ -181,7 +195,13 @@ public class TestingServiceImpl implements TestingService {
             //执行测试单元
             Map<String, Object> outputMap = this.testingRun(baseUrl, targetUrl, params);
             //执行结果写回
-            this.insertOutPutMap(outputMap, testing.getTestingId());
+            if (testing.getTestingOutput().isEmpty()) {
+                //新测试
+                this.insertOutPutMap(outputMap, testing.getTestingId());
+            } else {
+                //重新执行
+                this.updateOutputResult(outputMap, testing);
+            }
             //执行结果与预期结果对比，更新测试单元结果
             Map<String, Object> expectedoutputMap = this.getExpectedOutputMap(testing.getTestingId());
             testing.setResult(updateExpectedOutputWithOutput(expectedoutputMap, outputMap));
@@ -193,7 +213,8 @@ public class TestingServiceImpl implements TestingService {
         RestTemplate restTemplate = new RestTemplate();
         String url = baseUrl + targetUrl;
         System.out.println("开始测试url：" + url);
-        return restTemplate.postForObject(url, params, Map.class);
+        Map<String, Object> result = restTemplate.postForObject(url, params, Map.class);
+        return result;
     }
 
     private Boolean updateExpectedOutputWithOutput(Map<String, Object> expectedoutputMap, Map<String, Object> outputMap) {

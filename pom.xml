@@ -193,8 +193,8 @@
                             <port>8090</port>
                         </connector>
                     </connectors>
-                    <stopPort>9090</stopPort>
-                    <stopKey>a</stopKey>
+                    <!--<stopPort>9090</stopPort>-->
+                    <!--<stopKey>a</stopKey>-->
                     <!--<scanIntervalSeconds>2</scanIntervalSeconds>-->
                     <!--<contextXml>${project.basedir}/src/main/resources/jetty-context.xml</contextXml>-->
                     <scanIntervalSeconds>0</scanIntervalSeconds>
