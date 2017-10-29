@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.bupt.cbh.testing.dao.RandomTestingInuptDao">
+    <resultMap id="baseResultMap" type="RandomTestingInput">
+        <result property="inputId" column="input_id" jdbcType="INTEGER"/>
+        <result property="inputType" column="input_type" jdbcType="INTEGER"/>
+        <result property="inputValue" column="input_value" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="listByInputType" resultMap="baseResultMap">
+        select *
+        from random_testing_input
+        where input_type = #{inputType,jdbcType=INTEGER};
+    </select>
+
+</mapper>

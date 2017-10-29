@@ -1,9 +1,6 @@
 package edu.bupt.cbh.testing.service.impl;
 
-import edu.bupt.cbh.testing.dao.ExpectedTestingOutputDao;
-import edu.bupt.cbh.testing.dao.TestingInputDao;
-import edu.bupt.cbh.testing.dao.TestingOutputDao;
-import edu.bupt.cbh.testing.dao.TestingDao;
+import edu.bupt.cbh.testing.dao.*;
 import edu.bupt.cbh.testing.entity.*;
 import edu.bupt.cbh.testing.service.TestingService;
 import edu.bupt.cbh.testing.vo.AddTestingVO;
@@ -24,6 +21,9 @@ public class TestingServiceImpl implements TestingService {
 
     @Autowired
     private TestingInputDao testingInputDao;
+
+    @Autowired
+    private RandomTestingInuptDao randomTestingInuptDao;
 
     @Autowired
     private TestingOutputDao testingOutputDao;
@@ -49,6 +49,10 @@ public class TestingServiceImpl implements TestingService {
         List<TestingInput> testingInputList = addTestingVO.getTestingInputList();
         for (TestingInput testingInput : testingInputList) {
             testingInput.setTestingId(testingId);
+            Integer inputType = testingInput.getInputType();
+            if (inputType != null && inputType != 0) {
+                testingInput.setInputValue(getInputValue(inputType));
+            }
             testingInputDao.insertTestingInput(testingInput);
             Integer inputId = testingInput.getInputId();
             if (inputId == null) {
@@ -221,5 +225,10 @@ public class TestingServiceImpl implements TestingService {
         return expectedoutputMap.equals(outputMap);
     }
 
+    private String getInputValue(int inputType) {
+        List<RandomTestingInput> randomTestingInputs = randomTestingInuptDao.listByInputType(inputType);
+        int index = new Random().nextInt(randomTestingInputs.size());
+        return randomTestingInputs.get(index).getInputValue();
+    }
 
 }

@@ -9,6 +9,7 @@
         <typeAlias alias="TestingOutput" type="edu.bupt.cbh.testing.entity.TestingOutput"/>
         <typeAlias alias="ExpectedTestingOutput" type="edu.bupt.cbh.testing.entity.ExpectedTestingOutput"/>
         <typeAlias alias="TestingInput" type="edu.bupt.cbh.testing.entity.TestingInput"/>
+        <typeAlias alias="RandomTestingInput" type="edu.bupt.cbh.testing.entity.RandomTestingInput"/>
     </typeAliases>
 
 </configuration>

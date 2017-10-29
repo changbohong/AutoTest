@@ -61,7 +61,7 @@ public class TestController {
     public ModelAndView createTest(CreateTestVO createTestVO) {
         //保存Test
         ModelAndView modelAndView = new ModelAndView("main/main");
-        Integer testId = testService.createTest(createTestVO);
+         Integer testId = testService.createTest(createTestVO);
         if (testId == null) {
             String msg = "创建测试失败，测试名称为：" + createTestVO.getName();
             modelAndView.addObject("msg", msg);

@@ -7,6 +7,7 @@ package edu.bupt.cbh.testing.entity;
 public class TestingInput {
     private Integer inputId;
     private Integer testingId;
+    private Integer inputType;
     private String inputKey;
     private String inputValue;
 
@@ -17,6 +18,14 @@ public class TestingInput {
 
     public void setTestingId(Integer testingId) {
         this.testingId = testingId;
+    }
+
+    public Integer getInputType() {
+        return inputType;
+    }
+
+    public void setInputType(Integer inputType) {
+        this.inputType = inputType;
     }
 
     public Integer getInputId() {

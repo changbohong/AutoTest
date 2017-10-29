@@ -4,6 +4,7 @@
     <resultMap id="baseResultMap" type="TestingInput">
         <result property="inputId" column="input_id" jdbcType="INTEGER"/>
         <result property="testingId" column="testing_id" jdbcType="INTEGER"/>
+        <result property="inputType" column="input_type" jdbcType="INTEGER"/>
         <result property="inputKey" column="input_key" jdbcType="VARCHAR"/>
         <result property="inputValue" column="input_value" jdbcType="VARCHAR"/>
     </resultMap>

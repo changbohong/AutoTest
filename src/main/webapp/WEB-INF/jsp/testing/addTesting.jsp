@@ -106,6 +106,12 @@
                     + "<div class='form-group'>"
                     + "<label class='col-sm-2 control-label'>字段值</label>"
                     + "<div class='col-sm-10'>"
+                    + "<select class='form-control js-toggle-next-input' name='testingInputList[" + (testingInputNO) + "].inputType'>"
+                    + "<option value='0' selected='selected'>手动输入</option>"
+                    + "<option value='1'>随机字母</option>"
+                    + "<option value='2'>随机数字</option>"
+                    + "<option value='3'>随机字母与数字</option>"
+                    + "</select>"
                     + "<input type='text' class='form-control' placeholder='请输入对应字段值' name='testingInputList[" + (testingInputNO) + "].inputValue'>"
                     + "</div>"
                     + "</div>"
@@ -113,6 +119,17 @@
                 $("#testingInputs").append(testingInput);
                 testingInputNO++;
             });
+
+            $('div').on('change', 'select.js-toggle-next-input', function () {
+                var $selcet = $('select.js-toggle-next-input');
+                var type = $selcet.val();
+                var $next = $selcet.next('input');
+                if (type == 0) {
+                    $next.show();
+                } else {
+                    $next.hide();
+                }
+            })
 
             <!--添加测试输入-->
             var expectedTestingOutputNO = 1;
@@ -171,6 +188,12 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">字段值</label>
                     <div class="col-sm-10">
+                        <select class='form-control js-toggle-next-input' name='testingInputList[0].inputType'>"
+                            <option value='0' selected='selected'>手动输入</option>
+                            <option value='1'>随机字母</option>
+                            <option value='2'>随机数字</option>
+                            <option value='3'>随机字母与数字</option>
+                        </select>
                         <input type="text" class="form-control" placeholder="请输入对应字段值，例如'changbohong'" value=""
                                name="testingInputList[0].inputValue">
                     </div>
@@ -220,7 +243,7 @@
                 </button>
             </div>
         </div>
-</div>
+
 </form>
 
 
