@@ -18,6 +18,7 @@ public class Test {
 
     private String name;
 
+    private Integer testType;
 
     private Boolean excuted = Constants.TestCons.NOT_EXCUTED;
 
@@ -99,6 +100,14 @@ public class Test {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getTestType() {
+        return testType;
+    }
+
+    public void setTestType(Integer testType) {
+        this.testType = testType;
     }
 
     public Boolean getExcuted() {

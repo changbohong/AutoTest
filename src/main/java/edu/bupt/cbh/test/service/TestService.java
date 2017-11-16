@@ -4,6 +4,7 @@ import edu.bupt.cbh.test.entity.Test;
 import edu.bupt.cbh.test.entity.TestResult;
 import edu.bupt.cbh.test.vo.CreateTestVO;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -40,5 +41,5 @@ public interface TestService {
      * 执行测试
      * @param testId
      */
-    void testRun(Integer testId);
+    void testRun(Integer testId) throws IOException;
 }

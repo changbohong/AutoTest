@@ -1,13 +1,22 @@
 package edu.bupt.cbh.testing.service.impl;
 
+import com.alibaba.fastjson.JSONArray;
+import edu.bupt.cbh.ceshi.CeshiController;
 import edu.bupt.cbh.testing.dao.*;
 import edu.bupt.cbh.testing.entity.*;
 import edu.bupt.cbh.testing.service.TestingService;
 import edu.bupt.cbh.testing.vo.AddTestingVO;
+import edu.bupt.cbh.testing.vo.ZTreeNodeVO;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -30,6 +39,9 @@ public class TestingServiceImpl implements TestingService {
 
     @Autowired
     private ExpectedTestingOutputDao expectedTestingOutputDao;
+
+    @Autowired
+    private TestingLinkResultDao testingLinkResultDao;
 
     @Override
     public Integer addTesting(AddTestingVO addTestingVO) {
@@ -69,6 +81,21 @@ public class TestingServiceImpl implements TestingService {
             if (expectedOutputId == null) {
                 System.out.println("插入ExpectedTestingOutput失败：【testingId:" + testingId + ",key：" + expectedTestingOutput.getOutputKey() + ",value:" + expectedTestingOutput.getOutputValue() + "】");
             }
+        }
+
+        return testingId;
+    }
+
+    @Override
+    public Integer addTestingLink(AddTestingVO addTestingVO) {
+        Testing testing = new Testing();
+        testing.setTestId(addTestingVO.getTestId());
+        testing.setTestingName(addTestingVO.getTestingName());
+        testing.setUrl(addTestingVO.getUrl());
+        testingDao.addTesting(testing);
+        Integer testingId = testing.getTestingId();
+        if (testingId == null) {
+            System.out.println("插入Testing失败：【testId：" + testing.getTestId() + ",testingName：" + testing.getTestingName() + "】");
         }
 
         return testingId;
@@ -211,6 +238,52 @@ public class TestingServiceImpl implements TestingService {
             testing.setResult(updateExpectedOutputWithOutput(expectedoutputMap, outputMap));
             this.updateTesting(testing);
         }
+    }
+
+    @Override
+    public void testingLinkRun(Integer testId, String baseUrl) throws IOException {
+        List<Testing> testingList = this.getAllTestings(testId);
+        List<TestingLinkResult> testingLinkResults = new ArrayList<>();
+        //依次执行
+        if (!baseUrl.startsWith("http")) {
+            baseUrl = "http://" + baseUrl;
+        }
+        for (Testing testing : testingList) {
+            String targetUrl = baseUrl + testing.getUrl();
+            Connection conn = Jsoup.connect(targetUrl);
+            Document doc = conn.get();
+            if (doc == null) {
+                doc = conn.post();
+            }
+            List<ZTreeNodeVO> tree = createZTree(doc.child(0));
+            String treeStr = JSONArray.toJSONString(tree);
+            TestingLinkResult testingLinkResult = new TestingLinkResult();
+            testingLinkResult.setTestingId(testing.getTestingId());
+            testingLinkResult.setTestingResult(treeStr);
+            testingLinkResults.add(testingLinkResult);
+        }
+        testingLinkResultDao.saveAll(testingLinkResults);
+    }
+
+    private List<ZTreeNodeVO> createZTree(Element html) {
+        List<ZTreeNodeVO> tree = new ArrayList<>();
+        Queue<Element> queue = new LinkedList<>();
+        queue.offer(html);
+        tree.add(new ZTreeNodeVO("0", "0", html.tagName(), false));
+        int index = -1;
+        while (!queue.isEmpty()) {
+            Element node = queue.poll();
+            index++;
+            Elements children = node.children();
+            for (int i = 0, len = children.size(); i < len; i++) {
+                Element child = children.get(i);
+                ZTreeNodeVO parent = tree.get(index);
+                String pId = parent.getId();
+                tree.add(new ZTreeNodeVO(pId + i, pId, child.tagName(), false));
+                queue.offer(child);
+            }
+        }
+        return tree;
     }
 
     private Map<String, Object> testingRun(String baseUrl, String targetUrl, Map<String, Object> params) {

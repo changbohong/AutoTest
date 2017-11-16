@@ -129,7 +129,7 @@
                 } else {
                     $next.hide();
                 }
-            })
+            });
 
             <!--添加测试输入-->
             var expectedTestingOutputNO = 1;

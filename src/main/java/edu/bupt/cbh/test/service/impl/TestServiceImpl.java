@@ -12,6 +12,7 @@ import edu.bupt.cbh.user.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +39,7 @@ public class TestServiceImpl implements TestService {
         test.setUrl(createTestVO.getUrl());
         test.setUser(user);
         test.setUserId(user.getId());
+        test.setTestType(createTestVO.getTestType());
         test.setName(createTestVO.getName());
         test.setCreateTime(new Date());
         test.setExcuteTime(createTestVO.getExcuteTime());
@@ -70,11 +72,18 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
-    public void testRun(Integer testId) {
+    public void testRun(Integer testId) throws IOException {
         Test test = this.getTestById(testId);
         String baseUrl = test.getUrl();
+
         System.out.println("开始执行测试，测试名称：" + test.getName());
-        testingService.testingRun(testId, baseUrl);
+        //判断测试类型
+        if (test.getTestType() == 0){
+            testingService.testingRun(testId, baseUrl);
+        } else if (test.getTestType() == 1){
+            testingService.testingLinkRun(testId, baseUrl);
+        }
+
         System.out.println("执行测试完毕，测试名称：" + test.getName());
         //如果是，则需要手动点击立即执行
         if (test.getIsExcuteNow()) {

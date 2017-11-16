@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta name="viewport" http-equiv="Content-Type" content="text/html" charset="UTF-8">
-    <title>测试详情</title>
+    <title>添加测试单元</title>
     <!-- 引入 Bootstrap -->
     <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
@@ -19,6 +19,18 @@
 
     <%--<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css"     rel="stylesheet">--%>
     <%--<link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">--%>
+
+    <!-- 点击"#add",向"#target"添加内容-->
+    <script>
+        $(function () {
+            var freq = "<div class='col-md-offset-2 col-md-9' style='padding-top:10px;'>"
+                + "<input type='text' class='form-control' name='client.frequentFlyers'>"
+                + "</div>";
+            $("#add").click(function () {
+                $("#freqs").append(freq);
+            });
+        });
+    </script>
 
 
 </head>
@@ -41,13 +53,6 @@
             <label for="testname" class="col-sm-2 control-label">测试名称</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="testname" value="${test.name}" readonly>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="testType" class="col-sm-2 control-label">测试类型</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="testType" value="${test.testType}" readonly>
             </div>
         </div>
 
@@ -83,69 +88,43 @@
             </div>
         </c:if>
 
+    </form>
+    <form class="form-horizontal" role="form" method="post" action="/testing/addTestingLink">
+
+        <div id="testing">
+            <hr>
+            <div class="form-group" style="display: none">
+                <label for="testname" class="col-sm-2 control-label">测试Id</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="testId" value="${test.id}" name="testId" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">测试单元名称</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" placeholder="请输入测试单元名称" value="" name="testingName">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">测试单元URL</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" placeholder="请输入测试单元URL" value="" name="url">
+                </div>
+            </div>
+
+        </div>
+
+        <hr>
+
         <div class="form-group">
-            <label for="url" class="col-sm-2 control-label">测试地址</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="url" value="${test.url}" readonly>
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">
+                    <span class="glyphicon glyphicon-ok"/> 完成添加
+                </button>
             </div>
         </div>
 
-    </form>
-
-    <form class="form-horizontal" role="form">
-        <c:forEach var="testing" items="${testingList}">
-            <hr>
-            <div class="form-group">
-                <label for="testingName" class="col-sm-2 control-label">测试单元名称</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="testingName" value="${testing.testingName}" readonly>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="testingUrl" class="col-sm-2 control-label">测试单元子链接</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="testingUrl" value="${testing.url}" readonly>
-                </div>
-            </div>
-
-            <div class="col-sm-10 col-sm-offset-2">
-                <table class="table table-bordered table-striped table-hover">
-                    <thead>
-                    <tr>
-                        <th class="text-center">测试字段</th>
-                        <th class="text-center">测试输入</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="item" items="${testing.testingInput}">
-                        <tr>
-                            <td>${item.key}</td>
-                            <td>${item.value}</td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-
-                <table class="table table-bordered table-striped table-hover">
-                    <thead>
-                    <tr>
-                        <th class="text-center">返回字段</th>
-                        <th class="text-center">测试预期输出</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="testingOutputResult" items="${testing.testingOutputResultList}">
-                        <tr>
-                            <td>${testingOutputResult.key}</td>
-                            <td>${testingOutputResult.expectedOutput}</td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-            </div>
-        </c:forEach>
-    </form>
+</form>
 
 
 </div>

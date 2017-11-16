@@ -40,9 +40,38 @@ public class TestingController {
      */
     @RequestMapping("/toAddTesting")
     public ModelAndView toAddTesting(Integer id) {
-        ModelAndView modelAndView = new ModelAndView("testing/addTesting");
+        ModelAndView modelAndView;
         Test test = testService.getTestById(id);
+        //判断测试类型
+        if (test.getTestType() == 0){
+            modelAndView = new ModelAndView("testing/addTesting");
+        } else if (test.getTestType() == 1){
+            modelAndView = new ModelAndView("testing/addTestingLink");
+        } else {
+            modelAndView = new ModelAndView("testing/addTesting");
+        }
         modelAndView.addObject("test", test);
+        return modelAndView;
+    }
+
+
+    /**
+     * 添加链接测试单元
+     * @param addTestingVO
+     * @return
+     */
+    @RequestMapping("/addTestingLink")
+    public ModelAndView addTestingLink(AddTestingVO addTestingVO) {
+        //保存Testing
+        ModelAndView modelAndView = new ModelAndView("main/main");
+        Integer testingId = testingService.addTestingLink(addTestingVO);
+        if (testingId == null) {
+            String msg = "创建测试失败，测试名称为：" + addTestingVO.getTestingName();
+            modelAndView.addObject("msg", msg);
+            System.out.println(msg);
+            return modelAndView;
+        }
+        modelAndView.addObject("msg", "创建成功");
         return modelAndView;
     }
 

@@ -19,6 +19,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -123,7 +124,7 @@ public class TestController {
      * @return
      */
     @RequestMapping("/testRun")
-    public ModelAndView testRun(Integer id) {
+    public ModelAndView testRun(Integer id) throws IOException {
         ModelAndView modelAndView = new ModelAndView("main/main");
         testService.testRun(id);
         return modelAndView;

@@ -14,6 +14,8 @@ public class CreateTestVO {
 
     private String name;
 
+    private Integer testType;
+
     private String url;
 
     private Boolean isExcuteNow;
@@ -26,6 +28,14 @@ public class CreateTestVO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getTestType() {
+        return testType;
+    }
+
+    public void setTestType(Integer testType) {
+        this.testType = testType;
     }
 
     public Boolean getIsExcuteNow() {

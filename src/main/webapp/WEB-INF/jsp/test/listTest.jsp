@@ -26,6 +26,7 @@
             <th class="text-center">测试编号</th>
             <th class="text-center">创建者ID</th>
             <th class="text-center">测试名称</th>
+            <th class="text-center">测试类型</th>
             <th class="text-center">测试状态</th>
             <th class="text-center">操作</th>
         </tr>
@@ -36,6 +37,14 @@
                 <td>${test.id}</td>
                 <td>${test.userId}</td>
                 <td>${test.name}</td>
+                <td>
+                       <c:choose>
+                           <c:when test="${test.testType == 0}">功能测试</c:when>
+                           <c:when test="${test.testType == 1}">链接测试</c:when>
+                           <c:when test="${test.testType == 2}">搜索测试</c:when>
+                           <c:otherwise>其他类型</c:otherwise>
+                       </c:choose>
+                </td>
                 <td>${test.excuted}</td>
                 <td>
                     <c:if test="${test.excuted!=true}">

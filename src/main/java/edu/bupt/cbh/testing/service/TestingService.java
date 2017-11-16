@@ -3,6 +3,7 @@ package edu.bupt.cbh.testing.service;
 import edu.bupt.cbh.testing.entity.*;
 import edu.bupt.cbh.testing.vo.AddTestingVO;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,13 @@ public interface TestingService {
      * @return
      */
     Integer addTesting(AddTestingVO addTestingVO);
+
+    /**
+     * 创建链接测试单元
+     * @param addTestingVO
+     * @return
+     */
+    Integer addTestingLink(AddTestingVO addTestingVO);
 
     /**
      * 更新测试单元
@@ -56,6 +64,13 @@ public interface TestingService {
      * @param baseUrl
      */
     void testingRun(Integer testId , String baseUrl);
+
+    /**
+     * 执行链接测试单元
+     * @param testId
+     * @param baseUrl
+     */
+    void testingLinkRun(Integer testId , String baseUrl) throws IOException;
 
     List<TestingOutputResult> getTestingResultListByTesting(Testing testing);
 }

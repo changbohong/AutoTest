@@ -49,6 +49,17 @@
         </div>
 
         <div class="form-group">
+            <label class="col-sm-2 control-label">测试种类</label>
+            <div class="col-sm-10">
+                <select class='form-control js-toggle-next-input' name='testType'>"
+                    <option value='0' selected='selected'>功能测试</option>
+                    <option value='1'>链接测试</option>
+                    <option value='2'>搜索测试</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
             <label for="testname" class="col-sm-2 control-label">测试地址</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="url" placeholder="请输入测试地址" value="${url}" name="url">

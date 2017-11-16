@@ -29,5 +29,11 @@ public class Constants {
         public static final String KEY_NOT_FOUND = "未收到该字段";
     }
 
+    public static class TestType{
+        public static final String FUNTCION = "功能";
+        public static final String PAGE = "页面";
+        public static final String SEARCH = "搜索";
+    }
+
     public static final Integer PAGE_SIZE = 10;
 }
